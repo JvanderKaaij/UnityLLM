@@ -1,0 +1,236 @@
+fileFormatVersion: 2
+guid: 5de412e05793cdb49949d16fc60a8970
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Arm_Horse
+    100002: Base_bone
+    100004: Ear.L
+    100006: Ear.R
+    100008: eye.L
+    100010: eye.R
+    100012: head
+    100014: Help_knee.L
+    100016: Help_knee.R
+    100018: hip_1_f.L
+    100020: hip_1_f.R
+    100022: hip_2_f.L
+    100024: hip_2_f.R
+    100026: hip_b.L
+    100028: hip_b.R
+    100030: hoof_b.L
+    100032: hoof_b.R
+    100034: hoof_b_Helper.L
+    100036: hoof_b_Helper.R
+    100038: hoof_f.L
+    100040: hoof_f.R
+    100042: hoof_f_Helper.L
+    100044: hoof_f_Helper.R
+    100046: //RootNode
+    100048: Horse_foal_LOD0
+    100050: mouth
+    100052: neck_01
+    100054: neck_02
+    100056: root_bone
+    100058: shin_b.L
+    100060: shin_b.R
+    100062: shin_f.L
+    100064: shin_f.R
+    100066: Spine_02
+    100068: Spine_03
+    100070: Spine_04
+    100072: Spine_05
+    100074: Spine_base
+    100076: tail_1
+    100078: tail_2
+    100080: tail_3
+    100082: tail_4
+    100084: tail_5
+    100086: thigh_b.L
+    100088: thigh_b.R
+    100090: thigh_f.L
+    100092: thigh_f.R
+    400000: Arm_Horse
+    400002: Base_bone
+    400004: Ear.L
+    400006: Ear.R
+    400008: eye.L
+    400010: eye.R
+    400012: head
+    400014: Help_knee.L
+    400016: Help_knee.R
+    400018: hip_1_f.L
+    400020: hip_1_f.R
+    400022: hip_2_f.L
+    400024: hip_2_f.R
+    400026: hip_b.L
+    400028: hip_b.R
+    400030: hoof_b.L
+    400032: hoof_b.R
+    400034: hoof_b_Helper.L
+    400036: hoof_b_Helper.R
+    400038: hoof_f.L
+    400040: hoof_f.R
+    400042: hoof_f_Helper.L
+    400044: hoof_f_Helper.R
+    400046: //RootNode
+    400048: Horse_foal_LOD0
+    400050: mouth
+    400052: neck_01
+    400054: neck_02
+    400056: root_bone
+    400058: shin_b.L
+    400060: shin_b.R
+    400062: shin_f.L
+    400064: shin_f.R
+    400066: Spine_02
+    400068: Spine_03
+    400070: Spine_04
+    400072: Spine_05
+    400074: Spine_base
+    400076: tail_1
+    400078: tail_2
+    400080: tail_3
+    400082: tail_4
+    400084: tail_5
+    400086: thigh_b.L
+    400088: thigh_b.R
+    400090: thigh_f.L
+    400092: thigh_f.R
+    2100000: Horse_foal
+    4300000: Horse_foal_LOD0
+    7400000: Arm_Horse|Attack_1
+    7400002: Arm_Horse|Attack_2
+    7400004: Arm_Horse|Attack_3
+    7400006: Arm_Horse|Death_1
+    7400008: Arm_Horse|Death_2
+    7400010: Arm_Horse|Drink
+    7400012: Arm_Horse|Eat
+    7400014: Arm_Horse|Fall_high
+    7400016: Arm_Horse|Fall_landing
+    7400018: Arm_Horse|Fall_low
+    7400020: Arm_Horse|Fall_start
+    7400022: Arm_Horse|Hit_back
+    7400024: Arm_Horse|Hit_front
+    7400026: Arm_Horse|Hit_simple
+    7400028: Arm_Horse|Idle_1
+    7400030: Arm_Horse|Idle_2
+    7400032: Arm_Horse|Idle_3
+    7400034: Arm_Horse|Idle_4
+    7400036: Arm_Horse|Jump_F
+    7400038: Arm_Horse|Jump_place
+    7400040: Arm_Horse|Jump_Run
+    7400042: Arm_Horse|Lie
+    7400044: Arm_Horse|Lie_sleep
+    7400046: Arm_Horse|Run_F
+    7400048: Arm_Horse|Run_L
+    7400050: Arm_Horse|Run_R
+    7400052: Arm_Horse|Swim_B
+    7400054: Arm_Horse|Swim_B_L
+    7400056: Arm_Horse|Swim_B_R
+    7400058: Arm_Horse|Swim_F
+    7400060: Arm_Horse|Swim_F_L
+    7400062: Arm_Horse|Swim_F_R
+    7400064: Arm_Horse|Swim_Idle
+    7400066: Arm_Horse|Swim_Turn_L
+    7400068: Arm_Horse|Swim_Turn_R
+    7400070: Arm_Horse|Trot_F
+    7400072: Arm_Horse|Trot_L
+    7400074: Arm_Horse|Trot_R
+    7400076: Arm_Horse|Turn_180_L
+    7400078: Arm_Horse|Turn_180_R
+    7400080: Arm_Horse|Turn_L
+    7400082: Arm_Horse|Turn_R
+    7400084: Arm_Horse|Walk_B
+    7400086: Arm_Horse|Walk_BL
+    7400088: Arm_Horse|Walk_BR
+    7400090: Arm_Horse|Walk_F
+    7400092: Arm_Horse|Walk_L
+    7400094: Arm_Horse|Walk_R
+    9500000: //RootNode
+    13700000: Horse_foal_LOD0
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Horse_foal
+    second: {fileID: 2100000, guid: e0ded467ed1ff06449413fb912a7b40a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

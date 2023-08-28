@@ -10,9 +10,7 @@ namespace OpenAIGPT
     public class GPTConnector : MonoBehaviour
     {
         [SerializeField] private string apiUrl = "https://api.openai.com/v1/chat/completions";
-        // [SerializeField] private string authorizationToken = "yourAuthorizationTokenHere";
-        // [SerializeField] private string organisationID = "yourOrganisationIDHere";
-        [SerializeField] private string model = "gpt-3.5-turbo";
+        [SerializeField] private string model = "gpt-4"; //gpt-3.5-turbo";
 
         public IEnumerator SendWebRequest(GPTMessageData[] message, Action<GPTResponseData> ResponseCallback)
         {
@@ -25,7 +23,7 @@ namespace OpenAIGPT
 
             string messagesJson = JsonUtility.ToJson(wrapper);
 
-            Debug.Log(messagesJson);
+            // Debug.Log(messagesJson);
 
             using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(apiUrl, ""))
             {
@@ -53,8 +51,6 @@ namespace OpenAIGPT
                 {
                     // Process the response
                     GPTResponseData response = JsonUtility.FromJson<GPTResponseData>(webRequest.downloadHandler.text);
-                    Debug.Log("Response: " + webRequest.downloadHandler.text);
-                    Debug.Log("Response 2: " + response);
                     ResponseCallback(response);
                 }
             }
