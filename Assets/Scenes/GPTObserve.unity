@@ -153,6 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3efffc30fe89341b39d169bc0511cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnCompile:
+    m_PersistentCalls:
+      m_Calls: []
+  target: {fileID: 0}
 --- !u!114 &1962718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3a6fc5e5834b18888d645010b0345d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  compiler: {fileID: 1962717}
+  OnCodePrepared:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1962719
 Transform:
   m_ObjectHideFlags: 0
@@ -552,7 +558,6 @@ GameObject:
   - component: {fileID: 1223278712}
   - component: {fileID: 1223278718}
   - component: {fileID: 1223278711}
-  - component: {fileID: 1223278710}
   - component: {fileID: 1223278716}
   - component: {fileID: 1223278715}
   - component: {fileID: 1223278709}
@@ -580,19 +585,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apiUrl: https://api.openai.com/v1/chat/completions
   model: gpt-3.5-turbo
---- !u!114 &1223278710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552beaf4c1b040f58142b386b69b8881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  connector: {fileID: 1223278709}
 --- !u!114 &1223278711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,14 +675,17 @@ MonoBehaviour:
   blipConnector: {fileID: 1223278713}
   kosmosConnector: {fileID: 1223278717}
   kosmosPrompt: 
+  kosmosPostPrompt: 
   gptConverser: {fileID: 1223278715}
   hierarchyExplorer: {fileID: 1223278711}
+  rayLength: 50
   OnResponse:
     m_PersistentCalls:
       m_Calls: []
   OnGroundedResponse:
     m_PersistentCalls:
       m_Calls: []
+  conversationLog: 
 --- !u!114 &1223278717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiUrl: http://localhost:8005/process_prompt
-  grounding: 0
 --- !u!114 &1223278718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +714,13 @@ MonoBehaviour:
   observer: {fileID: 1223278716}
   gptConverser: {fileID: 1223278715}
   codeBridge: {fileID: 1962718}
+  cliBridge: {fileID: 0}
+  preContext: 
+  afterQueries: 
+  addedContext: 
+  furtherContext: 
+  codeRequest: 
+  codeReconsider: 
 --- !u!1 &1252562554
 GameObject:
   m_ObjectHideFlags: 0

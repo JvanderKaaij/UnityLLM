@@ -1,14 +1,17 @@
 using System;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using Microsoft.CSharp;
+using OpenAIGPT;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RuntimeCompiler : MonoBehaviour
 {
+    public UnityEvent<GameObject> OnCompile;
+    public GameObject target;
+
     public void Call(string code, string className)
     {
         var assembly = Compile(code);
@@ -22,8 +25,8 @@ public class RuntimeCompiler : MonoBehaviour
                   );
 
         // We ask the compiled method to add its component to this.gameObject
-        var addedComponent = del.Invoke(gameObject);
-
+        var addedComponent = del.Invoke(target);
+        OnCompile.Invoke(target);
         // The delegate pre-bakes the reflection, so repeated calls don't
         // cost us every time, as long as we keep re-using the delegate.
     }
@@ -34,6 +37,8 @@ public class RuntimeCompiler : MonoBehaviour
         // if you're targeting non-Windows platforms:
         var provider = new CSharpCodeProvider();
         var param = new CompilerParameters();
+
+        param.CompilerOptions = "/langversion:latest";
         
         // System namespace for common types like collections.
         param.ReferencedAssemblies.Add("System.dll");
@@ -41,9 +46,11 @@ public class RuntimeCompiler : MonoBehaviour
         param.ReferencedAssemblies.Add("C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputLegacyModule.dll");
         param.ReferencedAssemblies.Add("C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll");
         param.ReferencedAssemblies.Add("C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll");
-        param.ReferencedAssemblies.Add ("D:/UserProjects/Joey/Unity/AssemblyGPT/Assets/Unity-Roslyn/netstandard.dll");
-        param.ReferencedAssemblies.Add (typeof(MonoBehaviour).Assembly.Location);
-        
+        param.ReferencedAssemblies.Add("D:/UserProjects/Joey/Unity/AssemblyGPT/Assets/Unity-Roslyn/netstandard.dll");
+        param.ReferencedAssemblies.Add("D:/UserProjects/Joey/Unity/UnityLLM/Library/ScriptAssemblies/Unity.ML-Agents.dll");
+        param.ReferencedAssemblies.Add(typeof(MonoBehaviour).Assembly.Location);
+
+
         // foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
         //     param.ReferencedAssemblies.Add(assembly.Location);
         // } 

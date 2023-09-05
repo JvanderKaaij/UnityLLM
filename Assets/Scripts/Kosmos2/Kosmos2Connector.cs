@@ -35,14 +35,12 @@ namespace Kosmos2
     public class Kosmos2Connector:MonoBehaviour
     {
         [SerializeField] private string apiUrl = "http://localhost:8005/process_grounding_prompt";
-        [SerializeField] private bool grounding = true;
         public IEnumerator InterpretImage(byte[] imageBytes, string prompt, Action<KosmosResponseData> ResponseCallback)
         {
             WWWForm form = new WWWForm();
             form.AddBinaryData("image", imageBytes);
             
-            string promptType = grounding ? $"<grounding>{prompt}" : prompt;
-            form.AddField("prompt", promptType);
+            form.AddField("prompt", prompt);
             
             using (UnityWebRequest webRequest = UnityWebRequest.Post(apiUrl, form))
             {

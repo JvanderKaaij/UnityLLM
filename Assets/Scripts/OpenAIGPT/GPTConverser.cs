@@ -23,6 +23,7 @@ namespace OpenAIGPT
         
         public void CallMessage(string content)
         {
+            Debug.Log($"Ask GPT: {content}");
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
             StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse));
         }
@@ -45,7 +46,7 @@ namespace OpenAIGPT
         }
         
         public void AssistantResponse(GPTResponseData responseData){
-            Debug.Log($"Response: {responseData.choices[0].message.content}");
+            Debug.Log($"GPT Response: {responseData.choices[0].message.content}");
             messagesArray.Add(responseData.choices[0].message);
             OnResponse.Invoke(responseData.choices[0].message.content);
             // bridge.Process(responseData.choices[0].message.content);

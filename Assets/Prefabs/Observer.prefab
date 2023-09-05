@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8289443186264156805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7557431135012212090}
+  - component: {fileID: 1416821057603845968}
+  - component: {fileID: 2960451226261954316}
+  - component: {fileID: 7210828513694691677}
+  - component: {fileID: 4064262751324618855}
+  - component: {fileID: 6991899121046189943}
+  - component: {fileID: 3181761871148119341}
+  - component: {fileID: 3735422714826511522}
+  - component: {fileID: 7681936313815082217}
+  m_Layer: 0
+  m_Name: Observer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7557431135012212090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1416821057603845968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9462034200d0444f9629cb3770c495c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observer: {fileID: 7210828513694691677}
+  gptConverser: {fileID: 4064262751324618855}
+  codeBridge: {fileID: 0}
+  cliBridge: {fileID: 0}
+  preContext: The setting is a Unity scene that shows a potential reinforcement learning
+    scenario. Your goal is to establish the relationship between the present objects
+    and come up with a possible scenario for reinforcement learning. Ask your first
+    question to the VQA.
+  afterQueries: Give a detailed description of the complete scene.
+  addedContext: All the objects in the image are GameObjects in the a Unity scene.
+    What could be a possible thing that could happen in this scene to one of the
+    objects? Take into account what Components are attached to the GameObjects.
+  furtherContext: And in a Reinforcement Learning context. What could be a thing
+    that could happen in this scene to the objects that would require reinforcement
+    learning? Use only the objects that are present.
+  codeRequest: 'Write me a complete Unity C# code implementation for the ML-Agents
+    package. The code should train the scenario you just described. Avoid user interaction.
+    Use only the existing components. Never use any prefabs. Always find the reference
+    to GameObjects in the hierarchy by GameObject.Find() during the Awake() function.
+    An Agent implementation consists out of the following functions:
+
+    private
+    void Awake()
+
+    override void OnEpisodeBegin()
+
+    override void CollectObservations(VectorSensor
+    sensor)
+
+    OnActionReceived(ActionBuffers actionBuffers)
+
+    Make sure these
+    libraries are included:
+
+    using Unity.MLAgents;
+
+    using Unity.MLAgents.Sensors;
+
+    using
+    Unity.MLAgents.Actuators;'
+  codeReconsider: Could you improve on this code? Take into account the reward system
+    and see if you can make it more rigorous.
+--- !u!114 &2960451226261954316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bdb2ff55da64265bd35306b018addbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7210828513694691677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be00425194c867a4ebc950bf7af00268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraImageCapture: {fileID: 3735422714826511522}
+  blipConnector: {fileID: 3181761871148119341}
+  kosmosConnector: {fileID: 7681936313815082217}
+  kosmosPrompt: 
+  kosmosPostPrompt: Give a very detailed and correct description.
+  gptConverser: {fileID: 4064262751324618855}
+  hierarchyExplorer: {fileID: 2960451226261954316}
+  rayLength: 50
+  OnResponse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGroundedResponse:
+    m_PersistentCalls:
+      m_Calls: []
+  conversationLog: 
+--- !u!114 &4064262751324618855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c466801a49b46cca5312c0b2396a38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connector: {fileID: 6991899121046189943}
+  messagesArray: []
+  preContext: 'You are having a dialogue with an VQA AI that can describe what it
+    sees on an image. The context of the image is a Unity scene. You have to figure
+    out as much detail about the picture. You can only ask single short and simple
+    questions about the image. Be formal and don''t reitterate what the VQA has replied
+    to you. '
+  OnResponse:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6991899121046189943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e76a4d14a2cc7478bac3a9e7cde0eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: https://api.openai.com/v1/chat/completions
+  model: gpt-3.5-turbo
+--- !u!114 &3181761871148119341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58106d3f406248ed89a7851e99ff6d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large
+--- !u!114 &3735422714826511522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de199c8490af4efa802ba0467456412a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraToCapture: {fileID: 0}
+--- !u!114 &7681936313815082217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6820f9e2afd4e399e5cffc9174ebebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: http://localhost:8005/process_prompt

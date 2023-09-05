@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7728748063645220405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5737742064546038094}
+  - component: {fileID: 893463049951493364}
+  - component: {fileID: 87267897772918401}
+  - component: {fileID: 2645819600253256159}
+  - component: {fileID: 3023207729039795337}
+  - component: {fileID: 6682525027441150908}
+  m_Layer: 0
+  m_Name: CodeExecutor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5737742064546038094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728748063645220405}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893463049951493364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728748063645220405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3a6fc5e5834b18888d645010b0345d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCodePrepared:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 87267897772918401}
+        m_TargetAssemblyTypeName: RuntimeCompiler, Assembly-CSharp
+        m_MethodName: Call
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3023207729039795337}
+        m_TargetAssemblyTypeName: DefaultNamespace.MLAgents.MLCompilerReaction, Assembly-CSharp
+        m_MethodName: OnCodeExtracted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &87267897772918401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728748063645220405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3efffc30fe89341b39d169bc0511cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCompile:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3023207729039795337}
+        m_TargetAssemblyTypeName: DefaultNamespace.MLAgents.MLCompilerReaction, Assembly-CSharp
+        m_MethodName: DoneCompiling
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  target: {fileID: 0}
+--- !u!114 &2645819600253256159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728748063645220405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e8115218d5df945bc0b9c47a71969e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bridge: {fileID: 893463049951493364}
+  code: "using UnityEngine;\r\nusing Unity.MLAgents;\r\nusing Unity.MLAgents.Sensors;\r\nusing
+    Unity.MLAgents.Actuators;\r\n\r\npublic class PlaneBalanceAgent : Agent\r\n{\r\n   
+    public Transform ball;\r\n    public Transform plane;\r\n    private Rigidbody
+    ballRigidbody;\r\n\r\n    // Starting position for reset\r\n    private Vector3
+    ballStartPosition;\r\n    private Vector3 planeStartPosition;\r\n    private
+    Quaternion planeStartRotation;\r\n\r\n    private void Start()\r\n    {\r\n       
+    ball = GameObject.Find(\"Sphere\").transform;\r\n        plane = GameObject.Find(\"Plane\").transform;\r\n       
+    ballRigidbody = ball.GetComponent<Rigidbody>();\r\n        ballStartPosition
+    = ball.position;\r\n        planeStartPosition = plane.position;\r\n        planeStartRotation
+    = plane.rotation;\r\n    }\r\n\r\n    public override void OnEpisodeBegin()\r\n   
+    {\r\n        // Reset ball and plane\r\n        ball.position = ballStartPosition;\r\n       
+    ballRigidbody.velocity = Vector3.zero;\r\n        ballRigidbody.angularVelocity
+    = Vector3.zero;\r\n        \r\n        plane.position = planeStartPosition;\r\n       
+    plane.rotation = planeStartRotation;\r\n    }\r\n\r\n    public override void
+    CollectObservations(VectorSensor sensor)\r\n    {\r\n        // Relative position
+    of ball to plane\r\n        sensor.AddObservation(ball.position - plane.position);\r\n\r\n       
+    // Ball's velocity\r\n        sensor.AddObservation(ballRigidbody.velocity);\r\n   
+    }\r\n\r\n    public override void OnActionReceived(ActionBuffers actionBuffers)\r\n   
+    {\r\n        \r\n        Debug.Log(actionBuffers.ContinuousActions[0]);\r\n       
+    \r\n        float tiltAmountX = Mathf.Clamp(actionBuffers.ContinuousActions[0],
+    -1f, 1f);\r\n        float tiltAmountY = Mathf.Clamp(actionBuffers.ContinuousActions[1],
+    -1f, 1f);\r\n\r\n        Vector3 currentRotation = plane.rotation.eulerAngles;\r\n       
+    plane.rotation = Quaternion.Euler(currentRotation.x + tiltAmountX, currentRotation.y,
+    currentRotation.z + tiltAmountY);\r\n\r\n        // Rewards\r\n        if (Mathf.Abs(ball.position.x
+    - plane.position.x) < 0.5f && Mathf.Abs(ball.position.z - plane.position.z) <
+    0.5f)\r\n        {\r\n            AddReward(0.1f); // Small reward for keeping
+    the ball close to the center\r\n        }\r\n        else\r\n        {\r\n           
+    AddReward(-0.1f); // Small penalty for the ball being far from the center\r\n       
+    }\r\n\r\n        // Episode termination\r\n        if (ball.position.y < plane.position.y
+    - 1f)\r\n        {\r\n            AddReward(-1f); // Large penalty for letting
+    the ball fall off\r\n            EndEpisode();\r\n        }\r\n    }\r\n    \r\n\n}\r\n"
+--- !u!114 &3023207729039795337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728748063645220405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b241e8d9bf9434ab6eabcd333807361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourName: Ballance
+  decisionParams: 4
+  maxSteps: 1200
+  vectorObservations: 2
+  actions: 2
+  cliBridge: {fileID: 0}
+--- !u!114 &6682525027441150908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728748063645220405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc78f7d74316e894bbb5c3a23675ec86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualEnvPath: /usr/local/pyenv/versions/virtualenv/bin/activate
+  configPath: /mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml
+  runID: Ballance

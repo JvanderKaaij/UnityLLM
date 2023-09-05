@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace OpenAIGPT
 {
     public class GPTCSharpBridge:MonoBehaviour
     {
-        [SerializeField] private RuntimeCompiler compiler;
-
+        public UnityEvent<string, string> OnCodePrepared;
+        
         public void Process(string response)
         {
             var codeExtract = ExtractCode(response);
             var className = GetClassName(response);
             var completeCodeExtract = AddMeta(codeExtract, className);
             Debug.Log(completeCodeExtract);
-            compiler.Call(completeCodeExtract, className);
+            OnCodePrepared.Invoke(completeCodeExtract, className);
         }
 
         private string GetClassName(string response)
@@ -58,17 +59,27 @@ namespace OpenAIGPT
             {
                 return match.Groups[1].Value.Trim();
             }
+            
+            pattern = @"```C#([\s\S]*?)```";
+            match = Regex.Match(response, pattern);
+            
+            if (match.Success)
+            {
+                return match.Groups[1].Value.Trim();
+            }
+            
+            // Else it might be it's just code and nothing else.
+            if (response.Contains("MonoBehaviour") || response.Contains("Agent"))
+            {
+                return response;
+            }
             else
             {
-                if (response.Contains("MonoBehaviour"))// might be it's just code and nothing else.
-                {
-                    return response;
-                }
-                else
-                {
-                    return "No c# code found.";
-                }
+                return "No c# code found.";
             }
         }
+        
+        
+        
     }
 }

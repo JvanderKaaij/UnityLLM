@@ -11,12 +11,31 @@ namespace DefaultNamespace
         [SerializeField] LLMOObserver observer;
         [SerializeField] GPTConverser gptConverser;
         [SerializeField] GPTCSharpBridge codeBridge;
+        [SerializeField] CLIBridge cliBridge;
 
         private int counter;
+
+        [TextAreaAttribute]
+        [SerializeField] private string preContext;
+        
+        [TextAreaAttribute]
+        [SerializeField] private string afterQueries;
+        
+        [TextAreaAttribute]
+        [SerializeField] private string addedContext;
+        
+        [TextAreaAttribute]
+        [SerializeField] private string furtherContext;
+        
+        [TextAreaAttribute (10, 10)]
+        [SerializeField] private string codeRequest;
+        
+        [TextAreaAttribute]
+        [SerializeField] private string codeReconsider;
         
         private void Start()
         {
-            gptConverser.CallMessage("Ask your first question");
+            gptConverser.CallMessage(preContext);
             gptConverser.OnResponse.AddListener(GPTResponse);
             observer.OnResponse.AddListener(ObserverResponse);
             observer.OnGroundedResponse.AddListener(GroundedObservationResponse);
@@ -25,18 +44,23 @@ namespace DefaultNamespace
         private void GPTResponse(string response)
         {
             counter++;
-            if(counter <= 10){
+            if(counter <= 5){
                 observer.Observe(response);
-            }else if (counter == 11)
-            {
-                gptConverser.CallMessage("Now give a detailed description of the complete scene.");
-            }else if (counter == 12){
+            }else if (counter == 6) {   
+                gptConverser.CallMessage(afterQueries);
+            }else if (counter == 7){
                 observer.ObserveGrounded();
-            }else if (counter == 13) {
-                gptConverser.CallMessage("The image represents a Unity scene, and all the objects are objects in the scene. What could be a possible thing that could happen in this scene to one of the objects?");
-            }else if (counter == 14){
-                gptConverser.CallMessage("Write me Unity C# code that makes what you just described happen. Don't require user interaction. Use only the existing components. Never use any prefabs. Always find the objects in the hierarchy by GameObject. Find in the Start function. For updating use the Update function.");
-            }else if (counter == 15){
+            }else if (counter == 8) {
+                gptConverser.CallMessage(addedContext);
+            }else if (counter == 9) {
+                gptConverser.CallMessage(furtherContext);
+            }else if (counter == 10) { 
+                gptConverser.CallMessage(codeRequest);
+            }else if (counter == 11){
+                gptConverser.CallMessage(codeReconsider);
+                cliBridge.RunMLAgentsInWSL();//Start it before compiling and running the code, as it might take a while to spin up the process
+            }else if (counter == 12)
+            {
                 codeBridge.Process(response);
             }
         }
@@ -45,6 +69,7 @@ namespace DefaultNamespace
         {
             string last = gptConverser.GetLastMessage();
             //remote last string from response
+            response = response.Replace(last, "");
             response = response.Replace(last, "");
             gptConverser.CallMessage(response);
         }

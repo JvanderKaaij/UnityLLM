@@ -123,64 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1962716
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1962719}
-  - component: {fileID: 1962718}
-  - component: {fileID: 1962717}
-  m_Layer: 0
-  m_Name: CodeExecutor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1962717
+--- !u!114 &1962718 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 893463049951493364, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+  m_PrefabInstance: {fileID: 2384887444761156200}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3efffc30fe89341b39d169bc0511cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1962718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962716}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba3a6fc5e5834b18888d645010b0345d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  compiler: {fileID: 1962717}
---- !u!4 &1962719
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962716}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &787909759
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,186 +494,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &1223278708
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1223278712}
-  - component: {fileID: 1223278718}
-  - component: {fileID: 1223278711}
-  - component: {fileID: 1223278710}
-  - component: {fileID: 1223278716}
-  - component: {fileID: 1223278715}
-  - component: {fileID: 1223278709}
-  - component: {fileID: 1223278713}
-  - component: {fileID: 1223278714}
-  - component: {fileID: 1223278717}
-  m_Layer: 0
-  m_Name: Observer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1223278709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e76a4d14a2cc7478bac3a9e7cde0eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiUrl: https://api.openai.com/v1/chat/completions
-  model: gpt-3.5-turbo
---- !u!114 &1223278710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552beaf4c1b040f58142b386b69b8881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  connector: {fileID: 1223278709}
---- !u!114 &1223278711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bdb2ff55da64265bd35306b018addbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1223278712
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1223278713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58106d3f406248ed89a7851e99ff6d8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiUrl: https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large
---- !u!114 &1223278714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de199c8490af4efa802ba0467456412a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraToCapture: {fileID: 1101236551}
---- !u!114 &1223278715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c466801a49b46cca5312c0b2396a38a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  connector: {fileID: 1223278709}
-  messagesArray: []
-  preContext: 'You are having a dialogue with an VQA AI that can describe what it
-    sees on an image. The context of the image is a Unity scene. You have to figure
-    out as much detail about the picture. You can only ask single short and simple
-    questions about the image. Be formal and don''t reitterate what the VQA has replied
-    to you. '
-  OnResponse:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1223278716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be00425194c867a4ebc950bf7af00268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraImageCapture: {fileID: 1223278714}
-  blipConnector: {fileID: 1223278713}
-  kosmosConnector: {fileID: 1223278717}
-  kosmosPrompt: 
-  gptConverser: {fileID: 1223278715}
-  hierarchyExplorer: {fileID: 1223278711}
-  OnResponse:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGroundedResponse:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1223278717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6820f9e2afd4e399e5cffc9174ebebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiUrl: http://localhost:8005/process_prompt
-  grounding: 0
---- !u!114 &1223278718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223278708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9462034200d0444f9629cb3770c495c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  observer: {fileID: 1223278716}
-  gptConverser: {fileID: 1223278715}
-  codeBridge: {fileID: 1962718}
 --- !u!4 &401581760773229247
 Transform:
   m_ObjectHideFlags: 0
@@ -736,6 +509,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2384887444761156200
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728748063645220405, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: m_Name
+      value: CodeExecutor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
 --- !u!23 &3248793513998258847
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -778,6 +612,75 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &4407852854692577935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: codeBridge
+      value: 
+      objectReference: {fileID: 1962718}
+    - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: cameraToCapture
+      value: 
+      objectReference: {fileID: 1101236551}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8289443186264156805, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: m_Name
+      value: Observer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
 --- !u!1 &5237031480723612901
 GameObject:
   m_ObjectHideFlags: 0

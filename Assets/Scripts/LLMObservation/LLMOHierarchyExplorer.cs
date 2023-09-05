@@ -7,14 +7,6 @@ namespace LLMObservation
 {
     public class LLMOHierarchyExplorer:MonoBehaviour
     {
-
-        //lights
-        //camera (player)
-        //audio
-        
-        //movement
-        
-
         public string ObjectDescription(GameObject obj)
         {
             string transform = GetTransformDescription(obj);

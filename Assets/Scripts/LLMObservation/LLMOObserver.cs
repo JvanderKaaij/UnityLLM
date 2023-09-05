@@ -9,18 +9,18 @@ using UnityEngine.Events;
 public class LLMOObserver : MonoBehaviour
 {
     [SerializeField] CameraImageCapture cameraImageCapture;
-    [SerializeField] BlipConnector blipConnector;
     [SerializeField] Kosmos2Connector kosmosConnector;
     [SerializeField] string kosmosPrompt;
-    [SerializeField] GPTConverser gptConverser;
+    [SerializeField] string kosmosPostPrompt;
     [SerializeField] LLMOHierarchyExplorer hierarchyExplorer;
-
+    [SerializeField] private float rayLength = 50f;
     private string sceneDescription;
 
     public List<Kosmos2GroundedRelation> groundedRelations = new();
     public UnityEvent<string> OnResponse;
     public UnityEvent<List<Kosmos2GroundedRelation>> OnGroundedResponse;
 
+    public string conversationLog;
 
     [ContextMenu("Observe")]
     public void Observe()
@@ -30,13 +30,15 @@ public class LLMOObserver : MonoBehaviour
     
     public void Observe(string prompt)
     {
-        StartCoroutine(kosmosConnector.InterpretImage(cameraImageCapture.Capture(), prompt, KosmosResponse));
+        string newPrompt = $"{prompt} {kosmosPostPrompt}";
+        StartCoroutine(kosmosConnector.InterpretImage(cameraImageCapture.Capture(), newPrompt, KosmosResponse));
+        conversationLog += $"<question>{prompt}</question> ";
         // sceneDescription = hierarchyExplorer.HierarchyDescription();
     }
 
     public void ObserveGrounded()
     {
-        StartCoroutine(kosmosConnector.InterpretImage(cameraImageCapture.Capture(), "<grounding>An image of", KosmosGroundedResponse));
+        StartCoroutine(kosmosConnector.InterpretImage(cameraImageCapture.Capture(), "<grounding>As detailed as possible: An image of", KosmosGroundedResponse));
     }
 
     private void KosmosGroundedResponse(KosmosResponseData data)
@@ -45,8 +47,10 @@ public class LLMOObserver : MonoBehaviour
         foreach (var entity in data.entities)
         {
             var gObj = FindObjectsIn2DBoundingBox(entity.boundingBox);
+            Debug.Log($"BoundingBox Look for: {entity.label}");
             if (gObj)
             {
+                Debug.Log($"Object Found: {entity.label}");
                 groundedRelations.Add(new Kosmos2GroundedRelation(){label = entity.label, subject = gObj, components = hierarchyExplorer.GetComponentDescription(gObj)});
             }
         }
@@ -68,7 +72,7 @@ public class LLMOObserver : MonoBehaviour
 
         Ray ray = cameraImageCapture.cameraToCapture.ScreenPointToRay((minPoint + maxPoint) / 2f);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.blue, 20f);
+        Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.blue, 20f);
         if (Physics.Raycast(ray, out hit))
         {
             GameObject foundObject = hit.collider.gameObject;
