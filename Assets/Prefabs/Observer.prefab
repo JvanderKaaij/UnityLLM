@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7210828513694691677}
   - component: {fileID: 4064262751324618855}
   - component: {fileID: 6991899121046189943}
-  - component: {fileID: 3181761871148119341}
   - component: {fileID: 3735422714826511522}
   - component: {fileID: 7681936313815082217}
   m_Layer: 0
@@ -37,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1416821057603845968
 MonoBehaviour:
@@ -56,9 +55,10 @@ MonoBehaviour:
   codeBridge: {fileID: 0}
   cliBridge: {fileID: 0}
   preContext: The setting is a Unity scene that shows a potential reinforcement learning
-    scenario. Your goal is to establish the relationship between the present objects
-    and come up with a possible scenario for reinforcement learning. Ask your first
-    question to the VQA.
+    scenario. Your goal is to establish the relationship between the objects and
+    come up with a possible scenario for reinforcement learning. During the conversation
+    you can skip formality. Keep it as concise as possible. Ask your first question
+    to the VQA.
   afterQueries: Give a detailed description of the complete scene.
   addedContext: All the objects in the image are GameObjects in the a Unity scene.
     What could be a possible thing that could happen in this scene to one of the
@@ -68,22 +68,27 @@ MonoBehaviour:
     learning? Use only the objects that are present.
   codeRequest: 'Write me a complete Unity C# code implementation for the ML-Agents
     package. The code should train the scenario you just described. Avoid user interaction.
-    Use only the existing components. Never use any prefabs. Always find the reference
-    to GameObjects in the hierarchy by GameObject.Find() during the Awake() function.
-    An Agent implementation consists out of the following functions:
+    Use only the existing components. Never use any prefabs. Do not use the GameObject
+    the Component is added to. Always find the reference to GameObjects in the hierarchy
+    by GameObject.Find() during the Awake() function. An Agent implementation consists
+    out of the following functions:
 
-    private
-    void Awake()
+    private void Awake()
 
-    override void OnEpisodeBegin()
+    override void
+    OnEpisodeBegin()
 
-    override void CollectObservations(VectorSensor
-    sensor)
+    override void CollectObservations(VectorSensor sensor)
 
-    OnActionReceived(ActionBuffers actionBuffers)
+    OnActionReceived(ActionBuffers
+    actionBuffers)
 
-    Make sure these
-    libraries are included:
+
+    Never implement the Heuristic() method!
+
+
+    Make sure
+    these libraries are included:
 
     using Unity.MLAgents;
 
@@ -92,7 +97,8 @@ MonoBehaviour:
     using
     Unity.MLAgents.Actuators;'
   codeReconsider: Could you improve on this code? Take into account the reward system
-    and see if you can make it more rigorous.
+    and see if you can make it more rigorous. Everything in the code should be fully
+    implemented and working C# code.
 --- !u!114 &2960451226261954316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,11 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraImageCapture: {fileID: 3735422714826511522}
-  blipConnector: {fileID: 3181761871148119341}
   kosmosConnector: {fileID: 7681936313815082217}
   kosmosPrompt: 
-  kosmosPostPrompt: Give a very detailed and correct description.
-  gptConverser: {fileID: 4064262751324618855}
+  kosmosPostPrompt: Give a detailed, concise and correct description. Skip formalities.
   hierarchyExplorer: {fileID: 2960451226261954316}
   rayLength: 50
   OnResponse:
@@ -168,19 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apiUrl: https://api.openai.com/v1/chat/completions
   model: gpt-3.5-turbo
---- !u!114 &3181761871148119341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8289443186264156805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58106d3f406248ed89a7851e99ff6d8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiUrl: https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large
 --- !u!114 &3735422714826511522
 MonoBehaviour:
   m_ObjectHideFlags: 0

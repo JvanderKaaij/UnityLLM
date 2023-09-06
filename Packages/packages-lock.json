@@ -12,6 +12,13 @@
       },
       "url": "https://package.openupm.com"
     },
+    "com.e7.protobuf-unity": {
+      "version": "https://github.com/5argon/protobuf-unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "948ab23d0961066b135f52cbb39ac3bc639361a1"
+    },
     "com.lmnt.unity": {
       "version": "file:com.lmnt.unity",
       "depth": 0,

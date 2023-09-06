@@ -8,16 +8,14 @@ public class CLIBridge : MonoBehaviour
     [SerializeField]
     private string virtualEnvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
     [SerializeField]
-    private string configPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
-    [SerializeField]
     private string runID = "Ballance";
 
-    public async void RunMLAgentsInWSL()
+    public async void RunMLAgentsInWSL(string configPath)
     {
-        await Task.Run(() => ExecuteProcess());
+        await Task.Run(() => ExecuteProcess(configPath));
     }
     
-    void ExecuteProcess()
+    void ExecuteProcess(string configPath)
     {
         /*
          * This is the code that you need to run in order to start the ml-agents-learn command

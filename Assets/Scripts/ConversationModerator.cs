@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using Kosmos2;
+using MLAgents;
 using OpenAIGPT;
 using UnityEngine;
 
@@ -12,8 +13,11 @@ namespace DefaultNamespace
         [SerializeField] GPTConverser gptConverser;
         [SerializeField] GPTCSharpBridge codeBridge;
         [SerializeField] CLIBridge cliBridge;
-
+        [SerializeField] private string configPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
+        
+        
         private int counter;
+        private HyperParameterConfig hyperConfig;
 
         [TextAreaAttribute]
         [SerializeField] private string preContext;
@@ -32,6 +36,9 @@ namespace DefaultNamespace
         
         [TextAreaAttribute]
         [SerializeField] private string codeReconsider;
+        
+        [TextAreaAttribute]
+        [SerializeField] private string hyperParameterRequest;
         
         private void Start()
         {
@@ -58,7 +65,14 @@ namespace DefaultNamespace
                 gptConverser.CallMessage(codeRequest);
             }else if (counter == 11){
                 gptConverser.CallMessage(codeReconsider);
-                cliBridge.RunMLAgentsInWSL();//Start it before compiling and running the code, as it might take a while to spin up the process
+                cliBridge.RunMLAgentsInWSL(configPath);//Start it before compiling and running the code, as it might take a while to spin up the process
+                
+                //TODO Add HyperParameter Flow:
+                //At end of training - read hyper parameters from config file
+                //hyperConfig = HyperParameterBridge.Read(configPath);//Read hyper parameters from config file
+                //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
+                //Store new hyperparameters in config file HyperParameterBridge.Read(object, configPath);
+                
             }else if (counter == 12)
             {
                 codeBridge.Process(response);
