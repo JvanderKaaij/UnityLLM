@@ -159,12 +159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b241e8d9bf9434ab6eabcd333807361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviourName: Ballance
+  behaviourName: FootBall
   decisionParams: 4
-  maxSteps: 1200
+  maxSteps: 6000
   vectorObservations: 2
   actions: 2
-  cliBridge: {fileID: 0}
 --- !u!114 &6682525027441150908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,5 +177,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualEnvPath: /usr/local/pyenv/versions/virtualenv/bin/activate
-  configPath: /mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml
-  runID: Ballance
+  runID: FootBall

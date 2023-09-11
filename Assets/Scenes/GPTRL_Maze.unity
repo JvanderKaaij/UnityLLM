@@ -349,6 +349,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!115 &458099138
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: AcademyFixedUpdateStepper
+  m_Namespace: Unity.MLAgents
+  m_AssemblyName: Unity.ML-Agents
+--- !u!115 &510416565
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: AcademyFixedUpdateStepper
+  m_Namespace: Unity.MLAgents
+  m_AssemblyName: Unity.ML-Agents
 --- !u!1 &529153679
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +424,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!115 &728435616
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: AcademyFixedUpdateStepper
+  m_Namespace: Unity.MLAgents
+  m_AssemblyName: Unity.ML-Agents
 --- !u!1 &1043350806
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +633,50 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1063311745
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1063311747}
+  - component: {fileID: 1063311746}
+  m_Layer: 0
+  m_Name: AcademyFixedUpdateStepper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1063311746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063311745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1621104692}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1063311747
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063311745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1125945948
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GPTConversation: {fileID: 1146577110}
+  CLIBridge: {fileID: 1431835684}
 --- !u!4 &1125945950
 Transform:
   m_ObjectHideFlags: 0
@@ -806,6 +896,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1402987891
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1402987893}
+  - component: {fileID: 1402987892}
+  m_Layer: 0
+  m_Name: AcademyFixedUpdateStepper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1402987892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402987891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 728435616}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1402987893
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402987891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1431835678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -818,14 +952,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1563383308}
-    - target: {fileID: 3023207729039795337, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
-      propertyPath: maxSteps
-      value: 6000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023207729039795337, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
-      propertyPath: behaviourName
-      value: FootBall
-      objectReference: {fileID: 0}
     - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -870,17 +996,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6682525027441150908, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
-      propertyPath: runID
-      value: FootBall
-      objectReference: {fileID: 0}
     - target: {fileID: 7728748063645220405, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: m_Name
       value: CodeExecutor
-      objectReference: {fileID: 0}
-    - target: {fileID: 7728748063645220405, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -939,6 +1057,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!115 &1621104692
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: AcademyFixedUpdateStepper
+  m_Namespace: Unity.MLAgents
+  m_AssemblyName: Unity.ML-Agents
+--- !u!1 &1855969445
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1855969447}
+  - component: {fileID: 1855969446}
+  m_Layer: 0
+  m_Name: AcademyFixedUpdateStepper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1855969446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855969445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 510416565}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1855969447
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855969445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1890616101
 GameObject:
@@ -1290,6 +1467,50 @@ MonoScript:
   m_ClassName: AcademyFixedUpdateStepper
   m_Namespace: Unity.MLAgents
   m_AssemblyName: Unity.ML-Agents
+--- !u!1 &2023696742
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2023696744}
+  - component: {fileID: 2023696743}
+  m_Layer: 0
+  m_Name: AcademyFixedUpdateStepper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2023696743
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023696742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 458099138}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2023696744
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023696742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2030775063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1306,63 +1527,13 @@ PrefabInstance:
       propertyPath: codeBridge
       value: 
       objectReference: {fileID: 1431835679}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: configPath
-      value: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: codeRequest
-      value: 'Write a Unity C# code implementation of this Reinforcement Learning
-        process for the ML-Agents package. The code should train the scenario you
-        just described. Avoid user interaction. Use only the existing components.
-        Never use any prefabs. Do not use the GameObject the Component is added to.
-        Always find the reference to GameObjects in the hierarchy by GameObject.Find()
-        during the Awake() function. An Agent implementation consists out of the
-        following functions:
-
-        private void Awake()
-
-        override void
-        OnEpisodeBegin()
-
-        override void CollectObservations(VectorSensor
-        sensor)
-
-        OnActionReceived(ActionBuffers actionBuffers)
-
-
-        Always
-        Ignore implementing the Heuristic() method
-
-
-        Make sure these libraries
-        are included:
-
-        using Unity.MLAgents;
-
-        using Unity.MLAgents.Sensors;
-
-        using
-        Unity.MLAgents.Actuators;'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: afterQueries
-      value: Stop with asking questions about the scene, instead give a detailed
-        description of the complete scene.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: codeReconsider
-      value: Improve on this code. Take into account the reward system and make it
-        more rigorous. Everything in the code should be fully implemented and working
-        C# code.
-      objectReference: {fileID: 0}
     - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: cameraToCapture
       value: 
       objectReference: {fileID: 289805241}
     - target: {fileID: 6991899121046189943, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: model
-      value: gpt-4
+      value: gpt-3.5-turbo
       objectReference: {fileID: 0}
     - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: m_RootOrder

@@ -12,6 +12,8 @@ public class RuntimeCompiler : MonoBehaviour
     public UnityEvent<GameObject> OnCompile;
     public GameObject target;
 
+    public static Action CompilerError;
+
     public void Call(string code, string className)
     {
         var assembly = Compile(code);
@@ -70,7 +72,12 @@ public class RuntimeCompiler : MonoBehaviour
                 msg.AppendFormat("Error ({0}): {1} LineNumber: {2}\n",
                     error.ErrorNumber, error.ErrorText, error.Line);
             }
-            if(!canContinue) throw new Exception(msg.ToString());
+
+            if (!canContinue)
+            {
+                CompilerError?.Invoke();
+                Debug.Log($"Compiler error: {msg}");
+            }
         }
 
         // Return the assembly

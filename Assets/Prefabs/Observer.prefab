@@ -62,10 +62,10 @@ MonoBehaviour:
   afterQueries: Stop asking questions about the scene. Give a detailed description
     of the complete scene.
   addedContext: All the objects in the image are GameObjects in the a Unity scene.
-    What could be a possible thing that could happen in this scene to one of the
-    objects? Take into account what Components are attached to the GameObjects.
-  furtherContext: In a Reinforcement Learning context. Think of a scenario that makes
-    sense in this setting. Use only the objects that are present.
+    Describe what could be a possible thing that could happen in this scene to one
+    of the objects? Take into account what Components are attached to the GameObjects.
+  furtherContext: Describe a scenario that makes sense in a reinforcement learning
+    with the objects present.
   codeRequest: 'Write a Unity C# code implementation of this Reinforcement Learning
     process for the ML-Agents package. The code should train the scenario you just
     described. Avoid user interaction. Use only the existing components. Never use
@@ -95,10 +95,14 @@ MonoBehaviour:
 
     using Unity.MLAgents.Sensors;
 
-    using Unity.MLAgents.Actuators;'
+    using Unity.MLAgents.Actuators;
+
+
+    Write
+    me the C# code.'
   codeReconsider: Improve on this code. Take into account the reward system and make
     it more rigorous. Everything in the code should be fully implemented and working
-    C# code. Now write me C# code.
+    C# code. Write me Unity C# code.
   hyperParameterRequest: 
 --- !u!114 &2960451226261954316
 MonoBehaviour:

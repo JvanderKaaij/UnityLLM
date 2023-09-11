@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using OpenAIGPT;
 using Unity.MLAgents;
 using UnityEditor;
@@ -13,43 +12,71 @@ namespace DefaultNamespace
     public class LLMRLMetaController:MonoBehaviour
     {
         [SerializeField] private GPTConverser GPTConversation;
+        [SerializeField] private CLIBridge CLIBridge;
         private List<GPTMessageData> fullConversation = new();
         private bool continueLoop = true;
 
-        LLMRLMetaController()
+        static LLMRLMetaController mInstance;
+ 
+        public static LLMRLMetaController Instance
         {
-            // Academy.Instance.OnEpochReset += NextStep;
+            get
+            {
+                if (mInstance == null)
+                {
+                    Academy.OnEpochReset += OnNextStep;
+                    mInstance = new();
+                }
+                return mInstance;
+            }
+        }
+        
+        public static void OnNextStep()
+        {
+            Instance.NextStep();
         }
         
         void OnEnable() {
             Debug.Log("ENABLED!");
+            CLIBridge.ProcessDone += OnNextStep;
             Application.logMessageReceived += HandleLog;
-            Academy.Instance.OnEpochReset += NextStep;
+            RuntimeCompiler.CompilerError += HandleCompilerError;
         }
 
         void OnDisable() {
+            Debug.Log("DISABLED");
             Application.logMessageReceived -= HandleLog;
-            Academy.Instance.OnEpochReset -= NextStep;
+        }
 
+        void HandleCompilerError()
+        {
+            Debug.Log("Compiler Error Received!!! , Let's Restart");
+            RestartTraining();
         }
         
         void HandleLog(string logString, string stackTrace, LogType type) {
         
             if (type == LogType.Error) {
                Debug.Log("Error Received!!! , Let's Restart");
+               RestartTraining();
             }   
         }
 
-        
         [ContextMenu("Start Training")]
         private void StartTraining()
         {
             EditorApplication.isPlaying = true;
         }
 
+        public void RestartTraining()
+        {
+            Debug.Log("RESTART");
+            EditorApplication.isPlaying = false;
+            EditorCoroutine.Run(Restart());
+        }
+        
         public void NextStep()
         {
-            // fullConversation.AddRange(GPTConversation.messagesArray);
             Debug.Log($"GOT NEXT STEP! {fullConversation.Count}");
             EditorApplication.isPlaying = false;
             EditorCoroutine.Run(Restart());

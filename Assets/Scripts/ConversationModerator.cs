@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using Kosmos2;
 using MLAgents;
@@ -52,6 +53,7 @@ namespace DefaultNamespace
         private void GPTResponse(string response)
         {
             counter++;
+            Debug.Log($"Response Counter: {counter}");
             if(counter <= 5){
                 observer.Observe(response);
             }else if (counter == 6) {   
@@ -66,8 +68,7 @@ namespace DefaultNamespace
                 gptConverser.CallMessage(codeRequest);
             }else if (counter == 11){
                 gptConverser.CallMessage(codeReconsider);
-                cliBridge.RunMLAgentsInWSL(configPath);//Start it before compiling and running the code, as it might take a while to spin up the process
-                
+                cliBridge.RunMLAgentsInWSL(configPath); //Start it before compiling and running the code, as it might take a while to spin up the process
                 //TODO Add HyperParameter Flow:
                 //At end of training - read hyper parameters from config file
                 //hyperConfig = HyperParameterBridge.Read(configPath);//Read hyper parameters from config file

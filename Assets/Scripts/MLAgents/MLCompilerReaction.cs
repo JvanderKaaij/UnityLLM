@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Unity.MLAgents;
 using Unity.MLAgents.Policies;
 using UnityEngine;
@@ -41,19 +42,32 @@ namespace DefaultNamespace.MLAgents
             
             var agent = obj.GetComponent<Agent>();
             agent.MaxStep = maxSteps;
+            
+            obj.AddComponent<BehaviorParameters>();
+            
+            StartCoroutine(WaitFrameForStart(obj));
+        }
 
-            var behaviour = obj.AddComponent<BehaviorParameters>();
+        IEnumerator WaitFrameForStart(GameObject obj)
+        {
+            yield return new WaitForEndOfFrame();
+            
+            var behaviour = obj.GetComponent<BehaviorParameters>();
             behaviour.BehaviorName = behaviourName;
             behaviour.BrainParameters.VectorObservationSize = vectorObservations * 3;//To support Vector3's this should actually be dependant on the type of Observation
-            
             var behaveActionSpecs = behaviour.BrainParameters.ActionSpec;
             behaveActionSpecs.NumContinuousActions = actions;
             behaviour.BrainParameters.ActionSpec = behaveActionSpecs;
-
             behaviour.InferenceDevice = InferenceDevice.GPU;
-            
-            obj.SetActive(true);
+            try
+            {
+                obj.SetActive(true);
+            }
+            catch(Exception e)
+            {
+                Debug.Log("Error at enabling Agent");
+            }
         }
-        
+
     }
 }

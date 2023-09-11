@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +11,20 @@ public class CLIBridge : MonoBehaviour
     private string virtualEnvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
     [SerializeField]
     private string runID = "Ballance";
+
+    public Action ProcessDone;
+    
+    private ConcurrentQueue<System.Action> mainThreadActions = new();
+
+    
+    private void Update()
+    {
+        while(mainThreadActions.TryDequeue(out var action))
+        {
+            action.Invoke();
+        }
+    }
+    
 
     public async void RunMLAgentsInWSL(string configPath)
     {
@@ -56,7 +72,13 @@ public class CLIBridge : MonoBehaviour
             Debug.LogError(errorOutput);
 
         process.WaitForExit();
-
+        
+        //As we're in another Thread I need to Queue the Action into the mainThread
+        mainThreadActions.Enqueue(() =>
+        {
+            ProcessDone?.Invoke();
+        });
+        
         Debug.Log("Process Ended");
     }
 }
