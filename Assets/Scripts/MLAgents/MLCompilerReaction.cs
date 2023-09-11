@@ -61,6 +61,7 @@ namespace DefaultNamespace.MLAgents
             behaviour.InferenceDevice = InferenceDevice.GPU;
             try
             {
+                //TODO: Not working the try catch!
                 obj.SetActive(true);
             }
             catch(Exception e)

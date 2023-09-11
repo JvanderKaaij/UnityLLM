@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,12 +20,14 @@ namespace OpenAIGPT
         private void Awake()
         {
             messagesArray.Add(new GPTMessageData { role = "user", content = preContext});
+            LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = preContext});
         }
         
         public void CallMessage(string content)
         {
             Debug.Log($"Ask GPT: {content}");
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
+            LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = content });
             StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse));
         }
 
@@ -51,6 +54,9 @@ namespace OpenAIGPT
             Debug.Log($"Usage: prompt token: {responseData.usage.prompt_tokens} completion tokens: {responseData.usage.completion_tokens} total tokens: {responseData.usage.total_tokens}");
             
             messagesArray.Add(responseData.choices[0].message);
+            
+            LLMRLMetaController.fullConversation.Add(responseData.choices[0].message);
+            
             OnResponse.Invoke(responseData.choices[0].message.content);
             
             // bridge.Process(responseData.choices[0].message.content);

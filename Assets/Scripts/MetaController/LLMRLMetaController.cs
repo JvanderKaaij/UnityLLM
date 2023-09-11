@@ -11,9 +11,8 @@ namespace DefaultNamespace
     [InitializeOnLoad]
     public class LLMRLMetaController:MonoBehaviour
     {
-        [SerializeField] private GPTConverser GPTConversation;
         [SerializeField] private CLIBridge CLIBridge;
-        private List<GPTMessageData> fullConversation = new();
+        public static List<GPTMessageData> fullConversation = new();
         private bool continueLoop = true;
 
         static LLMRLMetaController mInstance;
@@ -25,6 +24,8 @@ namespace DefaultNamespace
                 if (mInstance == null)
                 {
                     Academy.OnEpochReset += OnNextStep;
+                    RuntimeCompiler.CompilerError += OnRestart;
+                    Application.logMessageReceived += OnLog;
                     mInstance = new();
                 }
                 return mInstance;
@@ -36,22 +37,24 @@ namespace DefaultNamespace
             Instance.NextStep();
         }
         
+        public static void OnLog(string logString, string stackTrace, LogType type)
+        {
+            Instance.HandleLog(logString, stackTrace, type);
+        }
+        
+        public static void OnRestart()
+        {
+            Instance.RestartTraining();
+        }
+        
         void OnEnable() {
             Debug.Log("ENABLED!");
             CLIBridge.ProcessDone += OnNextStep;
-            Application.logMessageReceived += HandleLog;
-            RuntimeCompiler.CompilerError += HandleCompilerError;
         }
 
         void OnDisable() {
             Debug.Log("DISABLED");
             Application.logMessageReceived -= HandleLog;
-        }
-
-        void HandleCompilerError()
-        {
-            Debug.Log("Compiler Error Received!!! , Let's Restart");
-            RestartTraining();
         }
         
         void HandleLog(string logString, string stackTrace, LogType type) {
@@ -78,11 +81,12 @@ namespace DefaultNamespace
         public void NextStep()
         {
             Debug.Log($"GOT NEXT STEP! {fullConversation.Count}");
-            EditorApplication.isPlaying = false;
             EditorCoroutine.Run(Restart());
         }
         private IEnumerator Restart()
         {
+            yield return new WaitForEndOfFrame();
+            EditorApplication.isPlaying = false;
             yield return new WaitForSeconds(2.0f);
             Debug.Log("Waited 2 seconds");
             EditorApplication.isPlaying = true;
