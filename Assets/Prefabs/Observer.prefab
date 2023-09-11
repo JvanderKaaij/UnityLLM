@@ -54,51 +54,52 @@ MonoBehaviour:
   gptConverser: {fileID: 4064262751324618855}
   codeBridge: {fileID: 0}
   cliBridge: {fileID: 0}
-  preContext: The setting is a Unity scene that shows a potential reinforcement learning
-    scenario. Your goal is to establish the relationship between the objects and
-    come up with a possible scenario for reinforcement learning. During the conversation
-    you can skip formality. Keep it as concise as possible. Ask your first question
-    to the VQA.
-  afterQueries: Give a detailed description of the complete scene.
+  configPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
+  preContext: Your goal is to establish the relationship between the objects in a
+    Unity scene and come up with a possible scenario for reinforcement learning.
+    During the conversation you can skip formality. Keep it as concise as possible.
+    Ask your first question to the VQA.
+  afterQueries: Stop asking questions about the scene. Give a detailed description
+    of the complete scene.
   addedContext: All the objects in the image are GameObjects in the a Unity scene.
     What could be a possible thing that could happen in this scene to one of the
     objects? Take into account what Components are attached to the GameObjects.
-  furtherContext: And in a Reinforcement Learning context. What could be a thing
-    that could happen in this scene to the objects that would require reinforcement
-    learning? Use only the objects that are present.
-  codeRequest: 'Write me a complete Unity C# code implementation for the ML-Agents
-    package. The code should train the scenario you just described. Avoid user interaction.
-    Use only the existing components. Never use any prefabs. Do not use the GameObject
-    the Component is added to. Always find the reference to GameObjects in the hierarchy
-    by GameObject.Find() during the Awake() function. An Agent implementation consists
-    out of the following functions:
+  furtherContext: In a Reinforcement Learning context. Think of a scenario that makes
+    sense in this setting. Use only the objects that are present.
+  codeRequest: 'Write a Unity C# code implementation of this Reinforcement Learning
+    process for the ML-Agents package. The code should train the scenario you just
+    described. Avoid user interaction. Use only the existing components. Never use
+    any prefabs. Do not use the GameObject the Component is added to. Always find
+    the reference to GameObjects in the hierarchy by GameObject.Find() during the
+    Awake() function. An Agent implementation consists out of the following functions:
 
-    private void Awake()
+    private
+    void Awake()
 
-    override void
-    OnEpisodeBegin()
+    override void OnEpisodeBegin()
 
-    override void CollectObservations(VectorSensor sensor)
+    override void CollectObservations(VectorSensor
+    sensor)
 
-    OnActionReceived(ActionBuffers
-    actionBuffers)
-
-
-    Never implement the Heuristic() method!
+    OnActionReceived(ActionBuffers actionBuffers)
 
 
-    Make sure
-    these libraries are included:
+    Always Ignore
+    implementing the Heuristic() method
 
-    using Unity.MLAgents;
+
+    Make sure these libraries are included:
+
+    using
+    Unity.MLAgents;
 
     using Unity.MLAgents.Sensors;
 
-    using
-    Unity.MLAgents.Actuators;'
-  codeReconsider: Could you improve on this code? Take into account the reward system
-    and see if you can make it more rigorous. Everything in the code should be fully
-    implemented and working C# code.
+    using Unity.MLAgents.Actuators;'
+  codeReconsider: Improve on this code. Take into account the reward system and make
+    it more rigorous. Everything in the code should be fully implemented and working
+    C# code. Now write me C# code.
+  hyperParameterRequest: 
 --- !u!114 &2960451226261954316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiUrl: https://api.openai.com/v1/chat/completions
-  model: gpt-3.5-turbo
+  model: gpt-4
+  temperature: 0.7
 --- !u!114 &3735422714826511522
 MonoBehaviour:
   m_ObjectHideFlags: 0

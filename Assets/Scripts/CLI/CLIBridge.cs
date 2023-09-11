@@ -23,7 +23,9 @@ public class CLIBridge : MonoBehaviour
          * You can retrieve the location by running pyenv prefix in the folder that the pyenv runs in
          */
         
-        string commandToRun = $"mlagents-learn {configPath} --run-id={runID} --force";  // Replace with your actual ml-agents command
+        Debug.Log($"Starting mlagents with configpath: {configPath} and runID: {runID}");
+        
+        string commandToRun = $"mlagents-learn {configPath} --run-id={runID} --force";
         
         // Formulate the WSL command to activate pyenv virtualenv and then run the command
         string wslCommand = $"wsl source {virtualEnvPath} ; {commandToRun}";

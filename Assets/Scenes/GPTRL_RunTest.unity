@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &102613504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 102613506}
+  - component: {fileID: 102613505}
+  m_Layer: 0
+  m_Name: MetaController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &102613505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102613504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9dcc1d811ca44d597f9c889520713a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &102613506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102613504}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4198717, y: 15.152517, z: 1.2692168}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &289805239
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,51 +422,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &1363698399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1363698401}
-  - component: {fileID: 1363698400}
-  m_Layer: 0
-  m_Name: HyperParams
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1363698400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363698399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 852fdaed268927c4bb2c6268aafb138e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  filePath: D:\UserProjects\Joey\Unity\UnityLLM\Config\ballance_plate_config.yaml
---- !u!4 &1363698401
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363698399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.40611884, y: -1.8713074, z: -1.0896492}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1431835678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,14 +433,53 @@ PrefabInstance:
     - target: {fileID: 87267897772918401, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1563383308}
+      objectReference: {fileID: 1801494792}
+    - target: {fileID: 2645819600253256159, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
+      propertyPath: code
+      value: "using Unity.MLAgents;\nusing Unity.MLAgents.Sensors;\nusing Unity.MLAgents.Actuators;\nusing
+        UnityEngine;\n\npublic class BallAgent : Agent\n{\n    private Rigidbody
+        ballRigidbody;\n    private Transform gridTransform;\n    private float initialDistanceToGrid;\n\n   
+        private void Awake()\n    {\n        ballRigidbody = GameObject.Find(\"Sphere\").GetComponent<Rigidbody>();\n       
+        gridTransform = GameObject.Find(\"PurpleSquare\").transform;\n    }\n\n   
+        public override void OnEpisodeBegin()\n    {\n        // Reset the ball's
+        position and velocity\n        ballRigidbody.velocity = Vector3.zero;\n       
+        ballRigidbody.angularVelocity = Vector3.zero;\n\n        // Randomly place
+        the ball and grid at new positions\n        ballRigidbody.transform.position
+        = GetRandomPosition();\n        gridTransform.position = GetRandomPosition();\n\n       
+        // Store the initial distance to the grid for reward calculation\n       
+        initialDistanceToGrid = Vector3.Distance(ballRigidbody.transform.position,
+        gridTransform.position);\n    }\n\n    public override void CollectObservations(VectorSensor
+        sensor)\n    {\n        // Observe the relative position of the ball and
+        grid\n        Vector3 relativePosition = gridTransform.position - ballRigidbody.transform.position;\n       
+        sensor.AddObservation(relativePosition.normalized);\n\n        // Observe
+        the ball's velocity\n        Vector3 ballVelocity = ballRigidbody.velocity;\n       
+        sensor.AddObservation(ballVelocity.normalized);\n    }\n\n    public override
+        void OnActionReceived(ActionBuffers actionBuffers)\n    {\n        // Get
+        the continuous action values and apply them as force to the ball\n       
+        float forceX = Mathf.Clamp(actionBuffers.ContinuousActions[0], -1f, 1f);\n       
+        float forceZ = Mathf.Clamp(actionBuffers.ContinuousActions[1], -1f, 1f);\n\n       
+        Vector3 force = new Vector3(forceX, 0f, forceZ);\n        ballRigidbody.AddForce(force
+        * 10f);\n\n        // Calculate the distance to the grid\n        float distanceToGrid
+        = Vector3.Distance(ballRigidbody.transform.position, gridTransform.position);\n\n       
+        // Set a reward based on the agent's proximity to the grid\n        float
+        reward = 0f;\n        if (distanceToGrid < initialDistanceToGrid)\n       
+        {\n            reward = 0.1f;\n        }\n        else\n        {\n           
+        reward = -0.1f;\n        }\n\n        // Apply a penalty if the agent collides
+        with the grid or moves away from it\n        if (distanceToGrid < 1f)\n       
+        {\n            reward += 1f;\n            EndEpisode();\n        }\n       
+        else if (distanceToGrid > initialDistanceToGrid)\n        {\n           
+        reward -= 0.5f;\n        }\n\n        SetReward(reward);\n    }\n\n    private
+        Vector3 GetRandomPosition()\n    {\n        float x = Random.Range(-5f, 5f);\n       
+        float z = Random.Range(-5f, 5f);\n        return new Vector3(x, 0.5f, z);\n   
+        }\n}\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 3023207729039795337, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: behaviourName
-      value: Football
+      value: FootBall
       objectReference: {fileID: 0}
     - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5737742064546038094, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -485,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6682525027441150908, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: runID
-      value: Football
+      value: FootBall
       objectReference: {fileID: 0}
     - target: {fileID: 7728748063645220405, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: m_Name
@@ -493,36 +531,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7728748063645220405, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
---- !u!114 &1431835679 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 893463049951493364, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
-  m_PrefabInstance: {fileID: 1431835678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba3a6fc5e5834b18888d645010b0345d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1431835684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6682525027441150908, guid: f04f111fb5e59fd48a7033c27f68c6b6, type: 3}
-  m_PrefabInstance: {fileID: 1431835678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc78f7d74316e894bbb5c3a23675ec86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1563383308
+--- !u!1 &1801494792
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -530,200 +546,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1563383309}
-  - component: {fileID: 1563383312}
-  - component: {fileID: 1563383311}
-  - component: {fileID: 1563383310}
-  - component: {fileID: 1563383313}
+  - component: {fileID: 1801494793}
   m_Layer: 0
-  m_Name: TargetAgent
+  m_Name: AgentTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &1563383309
+--- !u!4 &1801494793
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563383308}
+  m_GameObject: {fileID: 1801494792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.57529426, y: 0.20801066, z: -1.1993421}
+  m_LocalPosition: {x: 0.40611884, y: -1.8713074, z: -1.0896492}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1563383310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563383308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
---- !u!114 &1563383311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563383308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1c926e82378024a9407521fd388354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 4000
---- !u!114 &1563383312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563383308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 6
-    NumStackedVectorObservations: 1
-    m_ActionSpec:
-      m_NumContinuousActions: 2
-      BranchSizes: 
-    VectorActionSize: 02000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 1
-    hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: Ballance
-  TeamId: 0
-  m_UseChildSensors: 1
-  m_UseChildActuators: 1
-  m_ObservableAttributeHandling: 0
---- !u!114 &1563383313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563383308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a94944be8143158a8b34d2b236a7d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  filePath: 
---- !u!1 &1796159188
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1796159191}
-  - component: {fileID: 1796159190}
-  - component: {fileID: 1796159192}
-  - component: {fileID: 1796159193}
-  m_Layer: 0
-  m_Name: AgentController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1796159190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796159188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 2
-    NumStackedVectorObservations: 1
-    m_ActionSpec:
-      m_NumContinuousActions: 2
-      BranchSizes: 
-    VectorActionSize: 02000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 1
-    hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 1
-  m_BehaviorType: 0
-  m_BehaviorName: Ballance
-  TeamId: 0
-  m_UseChildSensors: 1
-  m_UseChildActuators: 1
-  m_ObservableAttributeHandling: 0
---- !u!4 &1796159191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796159188}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07212441, y: -4.0908833, z: 5.3149033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1796159192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796159188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
---- !u!114 &1796159193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796159188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1c926e82378024a9407521fd388354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
 --- !u!1 &1924485457
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1924485459
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -806,7 +651,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1924485462
 BoxCollider:
@@ -829,129 +674,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &2030775063
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: cliBridge
-      value: 
-      objectReference: {fileID: 1431835684}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: codeBridge
-      value: 
-      objectReference: {fileID: 1431835679}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: preContext
-      value: The setting is a Unity scene that shows a potential reinforcement learning
-        scenario. Your goal is to establish the relationship between the objects
-        and come up with a possible scenario for reinforcement learning. Ask your
-        first question to the VQA.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: codeRequest
-      value: 'Write me a complete Unity C# code implementation for the ML-Agents
-        package. The code should train the scenario you just described. Avoid user
-        interaction. Use only the existing components. Never use any prefabs. Always
-        find the reference to GameObjects in the hierarchy by GameObject.Find() during
-        the Awake() function. An Agent implementation consists out of the following
-        functions:
-
-        private void Awake()
-
-        override void OnEpisodeBegin()
-
-        override
-        void CollectObservations(VectorSensor sensor)
-
-        OnActionReceived(ActionBuffers
-        actionBuffers)
-
-
-        Never implement the Heuristic() method!
-
-
-        Make
-        sure these libraries are included:
-
-        using Unity.MLAgents;
-
-        using
-        Unity.MLAgents.Sensors;
-
-        using Unity.MLAgents.Actuators;'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: codeReconsider
-      value: Could you improve on this code? Take into account the reward system
-        and see if you can make it more rigorous. Everything in the code should be
-        fully implemented and working C# code.
-      objectReference: {fileID: 0}
-    - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: cameraToCapture
-      value: 
-      objectReference: {fileID: 289805241}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8289443186264156805, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_Name
-      value: Observer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8289443186264156805, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
 --- !u!1 &2048915905
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &2048915907
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1034,7 +756,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2048915910
 BoxCollider:
@@ -1076,7 +798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &2116521504
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1188,5 +910,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 106.380005, y: 0, z: 0}

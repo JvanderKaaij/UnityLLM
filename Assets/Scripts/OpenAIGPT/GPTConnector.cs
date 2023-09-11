@@ -11,19 +11,20 @@ namespace OpenAIGPT
     {
         [SerializeField] private string apiUrl = "https://api.openai.com/v1/chat/completions";
         [SerializeField] private string model = "gpt-4"; //gpt-3.5-turbo";
+        [SerializeField] private float temperature = 0.7f;
 
         public IEnumerator SendWebRequest(GPTMessageData[] message, Action<GPTResponseData> ResponseCallback)
         {
             GPTMessageWrapper wrapper = new GPTMessageWrapper
             {
                 model = model,
-                temperature = 0.7f,
+                temperature = temperature,
                 messages = message
             };
 
             string messagesJson = JsonUtility.ToJson(wrapper);
 
-            // Debug.Log(messagesJson);
+            Debug.Log(messagesJson);
 
             using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(apiUrl, ""))
             {

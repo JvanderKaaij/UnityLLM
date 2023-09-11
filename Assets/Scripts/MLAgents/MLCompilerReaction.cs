@@ -16,7 +16,7 @@ namespace DefaultNamespace.MLAgents
         //Retrieve actions and observations amount from the code
         public void OnCodeExtracted(string code, string className)
         {
-            Debug.Log($"CODE: {code}");
+            Debug.Log($"EXTRACTED CODE: {code}");
             actions = CountOccurrences(code, "actionBuffers.ContinuousActions");
             vectorObservations = CountOccurrences(code, "sensor.AddObservation");//TODO What type of Observation?
         }
@@ -42,7 +42,7 @@ namespace DefaultNamespace.MLAgents
             var agent = obj.GetComponent<Agent>();
             agent.MaxStep = maxSteps;
 
-            var behaviour = obj.GetComponent<BehaviorParameters>();
+            var behaviour = obj.AddComponent<BehaviorParameters>();
             behaviour.BehaviorName = behaviourName;
             behaviour.BrainParameters.VectorObservationSize = vectorObservations * 3;//To support Vector3's this should actually be dependant on the type of Observation
             

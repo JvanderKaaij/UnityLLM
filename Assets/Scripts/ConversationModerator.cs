@@ -3,6 +3,7 @@ using System.Text;
 using Kosmos2;
 using MLAgents;
 using OpenAIGPT;
+using Unity.MLAgents;
 using UnityEngine;
 
 namespace DefaultNamespace

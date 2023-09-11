@@ -48,7 +48,7 @@ namespace Kosmos2
 
                 if (webRequest.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.Log(webRequest.error);
+                    Debug.Log($"Kosmos Connection Error: {webRequest.error}");
                 }
                 else
                 {
