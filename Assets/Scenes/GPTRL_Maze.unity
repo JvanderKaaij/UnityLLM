@@ -693,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1125945949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,12 +701,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125945948}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9dcc1d811ca44d597f9c889520713a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CLIBridge: {fileID: 1431835684}
+  sessionPath: D:/UserProjects/Joey/Unity/UnityLLM/results/session.json
 --- !u!4 &1125945950
 Transform:
   m_ObjectHideFlags: 0
@@ -1516,17 +1516,52 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1431835679}
     - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[9].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartFormatSummary
+      propertyPath: OnResponseActions.Array.data[10].context
+      value: 'Write a Unity C# code implementation of this Reinforcement Learning
+        process for the ML-Agents package. The code should train the scenario you
+        just described. Avoid user interaction. Use only the existing components.
+        Never use any prefabs. Avoid using CompareTag. Always find the reference
+        to GameObject - as discussed before - in the hierarchy by GameObject.Find()
+        during the Awake() function. Never use the local GameObject itself. An Agent
+        implementation consists out of the following functions:
+
+        private
+        void Awake()
+
+        override void OnEpisodeBegin()
+
+        override void
+        CollectObservations(VectorSensor sensor)
+
+        OnActionReceived(ActionBuffers
+        actionBuffers)
+
+
+        Always Ignore implementing the Heuristic() method
+
+
+        Make
+        sure these libraries are included:
+
+        using Unity.MLAgents;
+
+        using
+        Unity.MLAgents.Sensors;
+
+        using Unity.MLAgents.Actuators;
+
+
+        Write
+        me the C# code.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: OnResponseActions.Array.data[7].addToSummary
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: cameraToCapture
       value: 
       objectReference: {fileID: 289805241}
-    - target: {fileID: 6991899121046189943, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: model
-      value: gpt-4
-      objectReference: {fileID: 0}
     - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DefaultNamespace;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -77,8 +78,10 @@ public class CLIBridge : MonoBehaviour
         mainThreadActions.Enqueue(() =>
         {
             ProcessDone?.Invoke();
+            LLMRLMetaController.OnNextStep();
         });
         
+        //RESTART NEXT
         Debug.Log("Process Ended");
     }
 }

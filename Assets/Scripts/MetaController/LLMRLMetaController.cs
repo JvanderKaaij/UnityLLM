@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using OpenAIGPT;
-using Unity.MLAgents;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,8 +10,11 @@ namespace DefaultNamespace
     [InitializeOnLoad]
     public class LLMRLMetaController:MonoBehaviour
     {
-        [SerializeField] private CLIBridge CLIBridge;
-        public static List<GPTMessageData> fullConversation = new();
+        public static string currentCode;
+        public static string currentSummary;
+
+        public string sessionPath = "D:/UserProjects/Joey/Unity/UnityLLM/results/session.json";
+        
         private bool continueLoop = true;
 
         static LLMRLMetaController mInstance;
@@ -23,7 +25,6 @@ namespace DefaultNamespace
             {
                 if (mInstance == null)
                 {
-                    Academy.OnEpochReset += OnNextStep;
                     RuntimeCompiler.CompilerError += OnRestart;
                     Application.logMessageReceived += OnLog;
                     mInstance = new();
@@ -47,20 +48,14 @@ namespace DefaultNamespace
             Instance.RestartTraining();
         }
         
-        void OnEnable() {
-            Debug.Log("ENABLED!");
-            CLIBridge.ProcessDone += OnNextStep;
-        }
-
         void OnDisable() {
-            Debug.Log("DISABLED");
             Application.logMessageReceived -= HandleLog;
         }
         
         void HandleLog(string logString, string stackTrace, LogType type) {
         
             if (type == LogType.Error) {
-               Debug.Log("Error Received!!! , Let's Restart");
+               Debug.Log("Error Received, Let's Restart");
                RestartTraining();
             }   
         }
@@ -80,9 +75,12 @@ namespace DefaultNamespace
         
         public void NextStep()
         {
-            Debug.Log($"GOT NEXT STEP! {fullConversation.Count}");
+            Debug.Log($"GOT NEXT STEP");
+            StoreData();
+            //With previous code, previous hyper params and monitoring, start a new run
             EditorCoroutine.Run(Restart());
         }
+        
         private IEnumerator Restart()
         {
             yield return new WaitForEndOfFrame();
@@ -90,6 +88,15 @@ namespace DefaultNamespace
             yield return new WaitForSeconds(2.0f);
             Debug.Log("Waited 2 seconds");
             EditorApplication.isPlaying = true;
+        }
+
+        [ContextMenu("Test Store Data")]
+        private void StoreData()
+        {
+            var data = MetaSessionDataController.RetrieveSessionData(Instance.sessionPath);
+            data.codeHistory.Add(currentCode);
+            data.summaryHistory.Add(currentSummary);
+            MetaSessionDataController.Save(Instance.sessionPath, data);
         }
 
     }

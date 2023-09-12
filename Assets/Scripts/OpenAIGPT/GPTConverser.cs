@@ -23,15 +23,12 @@ namespace OpenAIGPT
         private void Awake()
         {
             messagesArray.Add(new GPTMessageData { role = "system", content = preContext});
-            LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = preContext});
         }
         
         public void Prompt(string content)
         {
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
-            LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = content });
-            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse) );
-        }
+            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse) ); }
 
         public void FormatSummary(string summary)
         {
@@ -59,11 +56,8 @@ namespace OpenAIGPT
         
         public void AssistantResponse(GPTResponseData responseData){
             Debug.Log($"Usage: prompt token: {responseData.usage.prompt_tokens} completion tokens: {responseData.usage.completion_tokens} total tokens: {responseData.usage.total_tokens}");
-            
             messagesArray.Add(responseData.choices[0].message);
-            LLMRLMetaController.fullConversation.Add(responseData.choices[0].message);
             OnResponse.Invoke(responseData.choices[0].message.content);
-            
         }
     }
 }

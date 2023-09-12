@@ -58,12 +58,22 @@ namespace DefaultNamespace
             {
                 point.altAction.Invoke();
             }
+            
+            //At end of training - read hyper parameters from config file
+            //hyperConfig = HyperParameterBridge.Read(configPath);//Read hyper parameters from config file
+            //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
+            //Store new hyperparameters in config file HyperParameterBridge.Write(object, configPath);
+            
         }
 
         public void StartFormatSummary()
         {
             Debug.Log("SUMMARY: ");
             Debug.Log(summary);
+            
+            //Add previous run code and monitoring here 
+            
+            LLMRLMetaController.currentSummary = summary;
             gptConverser.FormatSummary(summary);
             ProcessNextPoint(summary);
         }
@@ -100,6 +110,7 @@ namespace DefaultNamespace
                     $"{relation.label} could be find by the name {relation.subject.name} in the Unity Hierarchy. It contains the following Components: {relation.components}");
             }
             gptConverser.Prompt(relationDescription.ToString());
+            summary += relationDescription.ToString();
         }
         
     }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +16,8 @@ namespace OpenAIGPT
             var completeCodeExtract = AddMeta(codeExtract, className);
             
             Debug.Log($"Extracted CODE with Classname: {className}: {codeExtract}");
+            
+            LLMRLMetaController.currentCode = codeExtract;
             
             OnCodePrepared?.Invoke(completeCodeExtract, className);
         }

@@ -219,8 +219,9 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: After Observations
-    context: Stop asking questions about the image. Give a detailed description of
-      the complete scene.
+    context: 'Stop asking questions about the image. Give a detailed description
+      of the complete scenario. For example: There are 5 cows standing in a field
+      eating grass.'
     sendsContext: 1
     sendsResponse: 0
     addToSummary: 1
@@ -243,8 +244,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - name: RL Context
-    context: All objects are part of a Unity scene. Describe a scenario that makes
-      sense in reinforcement learning with these objects.
+    context: All objects are part of a Unity scene. From the previous answers describe
+      a scenario that makes sense in reinforcement learning with these objects.
     sendsContext: 1
     sendsResponse: 0
     addToSummary: 1
@@ -279,7 +280,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1416821057603845968}
           m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
-          m_MethodName: FormatSummary
+          m_MethodName: StartFormatSummary
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -293,17 +294,17 @@ MonoBehaviour:
     context: 'Write a Unity C# code implementation of this Reinforcement Learning
       process for the ML-Agents package. The code should train the scenario you just
       described. Avoid user interaction. Use only the existing components. Never
-      use any prefabs. Avoid using CompareTag. Do not use the GameObject the Component
-      is added to. Always find the reference to GameObjects in the hierarchy by GameObject.Find()
-      during the Awake() function. An Agent implementation consists out of the following
-      functions:
+      use any prefabs. Avoid using CompareTag. Always find the reference to GameObject
+      - as discussed before - in the hierarchy by GameObject.Find() during the Awake()
+      function. Never use the local transform. An Agent implementation consists out
+      of the following functions:
 
       private void Awake()
 
-      override void OnEpisodeBegin()
+      override void
+      OnEpisodeBegin()
 
-      override
-      void CollectObservations(VectorSensor sensor)
+      override void CollectObservations(VectorSensor sensor)
 
       OnActionReceived(ActionBuffers
       actionBuffers)
