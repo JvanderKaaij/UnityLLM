@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Text;
 using Kosmos2;
 using MLAgents;
@@ -17,10 +19,11 @@ namespace DefaultNamespace
         [SerializeField] CLIBridge cliBridge;
         [SerializeField] private string configPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
         [SerializeField] private List<GPTConversationPoint> OnResponseActions;
-        
+
+        private string summary;
         private int counter;
         private HyperParameterConfig hyperConfig;
-
+        
         
         private void Start()
         {
@@ -32,11 +35,16 @@ namespace DefaultNamespace
 
         private void GPTResponse(string response)
         {
-            Debug.Log($"Response Counter: {counter}");
-            Debug.Log($"GPT Response: {response}");
-            
+            ProcessNextPoint(response);
+        }
+
+        private void ProcessNextPoint(string response)
+        {
             var point = OnResponseActions[counter];
-            
+            counter++; //has to happen right after the reference to avoid recursive calls
+            Debug.Log($"Current Response Action: {point.name}");
+            Debug.Log($"GPT Response: {response}");
+
             if (point.sendsContext){
                 point.action.Invoke(point.context);
 
@@ -44,12 +52,20 @@ namespace DefaultNamespace
                 point.action.Invoke(response);
             }
 
+            if (point.addToSummary) summary += response;
+
             if (point.altAction != null)
             {
                 point.altAction.Invoke();
             }
+        }
 
-            counter++;
+        public void StartFormatSummary()
+        {
+            Debug.Log("SUMMARY: ");
+            Debug.Log(summary);
+            gptConverser.FormatSummary(summary);
+            ProcessNextPoint(summary);
         }
 
         public void StartCode(string response)

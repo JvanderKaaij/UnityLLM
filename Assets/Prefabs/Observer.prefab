@@ -57,11 +57,11 @@ MonoBehaviour:
   configPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
   OnResponseActions:
   - name: Pre Context
-    context: Establish the relationship between the objects in an image by asking
-      a Visual QA Model. Keep it concise. Skip formalities. Ask your first question
-      to the VQA.
+    context: Establish the relationship between objects in an image by asking questions.
+      Keep it concise. Skip formalities. Ask your first question.
     sendsContext: 1
     sendsResponse: 0
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -77,10 +77,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Observe_01
     context: 
     sendsContext: 0
     sendsResponse: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -96,10 +100,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Observe_02
     context: 
     sendsContext: 0
     sendsResponse: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -115,10 +123,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Observe_03
     context: 
     sendsContext: 0
     sendsResponse: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -134,10 +146,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Observe_04
     context: 
     sendsContext: 0
     sendsResponse: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -153,10 +169,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Observe_05
     context: 
     sendsContext: 0
     sendsResponse: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -172,11 +192,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Observe Grounded
     context: 
     sendsContext: 0
     sendsResponse: 0
+    addToSummary: 0
     action:
+      m_PersistentCalls:
+        m_Calls: []
+    altAction:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 7210828513694691677}
@@ -196,6 +223,7 @@ MonoBehaviour:
       the complete scene.
     sendsContext: 1
     sendsResponse: 0
+    addToSummary: 1
     action:
       m_PersistentCalls:
         m_Calls:
@@ -211,11 +239,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: RL Context
     context: All objects are part of a Unity scene. Describe a scenario that makes
       sense in reinforcement learning with these objects.
     sendsContext: 1
     sendsResponse: 0
+    addToSummary: 1
     action:
       m_PersistentCalls:
         m_Calls:
@@ -223,6 +255,32 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
           m_MethodName: Prompt
           m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Format Summary
+    context: 
+    sendsContext: 0
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    altAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1416821057603845968}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: FormatSummary
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -269,6 +327,7 @@ MonoBehaviour:
       me the C# code.'
     sendsContext: 1
     sendsResponse: 0
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -284,17 +343,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Code Compile
     context: 
     sendsContext: 0
     sendsResponse: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: OpenAIGPT.GPTCSharpBridge, Assembly-CSharp
-          m_MethodName: Process
-          m_Mode: 5
+        - m_Target: {fileID: 1416821057603845968}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: StartCode
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -303,51 +366,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  preContext: Establish the relationship between the objects in an image by asking
-    a Visual QA Model. Keep it concise. Skip formalities. Ask your first question
-    to the VQA.
-  afterQueries: Stop asking questions about the image. Give a detailed description
-    of the complete scene.
-  addedContext: All the objects in the image are GameObjects in a Unity scene. Describe
-    what could be a possible thing that could happen in this scene to one of the
-    objects? Take into account what Components are attached to the GameObjects.
-  furtherContext: Describe a scenario that makes sense in a reinforcement learning
-    with the objects present.
-  codeRequest: 'Write a Unity C# code implementation of this Reinforcement Learning
-    process for the ML-Agents package. The code should train the scenario you just
-    described. Avoid user interaction. Use only the existing components. Never use
-    any prefabs. Avoid using CompareTag. Do not use the GameObject the Component
-    is added to. Always find the reference to GameObjects in the hierarchy by GameObject.Find()
-    during the Awake() function. An Agent implementation consists out of the following
-    functions:
-
-    private void Awake()
-
-    override void OnEpisodeBegin()
-
-    override
-    void CollectObservations(VectorSensor sensor)
-
-    OnActionReceived(ActionBuffers
-    actionBuffers)
-
-
-    Always Ignore implementing the Heuristic() method
-
-
-    Make
-    sure these libraries are included:
-
-    using Unity.MLAgents;
-
-    using Unity.MLAgents.Sensors;
-
-    using
-    Unity.MLAgents.Actuators;
-
-
-    Write me the C# code.'
-  hyperParameterRequest: 
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &2960451226261954316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +396,8 @@ MonoBehaviour:
   cameraImageCapture: {fileID: 3735422714826511522}
   kosmosConnector: {fileID: 7681936313815082217}
   kosmosPrompt: 
-  kosmosPostPrompt: Give a detailed, concise and correct description. Skip formalities.
+  kosmosPostPrompt: Be precise, concise and truthfull. Skip formalities. Answer the
+    following question.
   hierarchyExplorer: {fileID: 2960451226261954316}
   rayLength: 50
   OnResponse:
@@ -399,8 +421,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connector: {fileID: 6991899121046189943}
   messagesArray: []
-  preContext: You are an assistant helping coming up with a reinforcement learning
-    scenario and writing C# code.
+  preContext: You are an assistant asking questions about an image.
+  afterSummaryContext: You are an assistant helping coming up with a reinforcement
+    learning scenario and writing C# code.
   OnResponse:
     m_PersistentCalls:
       m_Calls: []

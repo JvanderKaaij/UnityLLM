@@ -52,7 +52,7 @@ namespace OpenAIGPT
                 {
                     // Process the response
                     GPTResponseData response = JsonUtility.FromJson<GPTResponseData>(webRequest.downloadHandler.text);
-                    ResponseCallback(response);
+                    ResponseCallback?.Invoke(response);
                 }
             }
 

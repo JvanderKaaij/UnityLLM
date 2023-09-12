@@ -693,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1125945949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +701,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125945948}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9dcc1d811ca44d597f9c889520713a4, type: 3}
   m_Name: 
@@ -1516,69 +1516,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1431835679}
     - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[0].context
-      value: Establish the relationship between objects in an image by asking questions.
-        Keep it concise. Skip formalities. Ask your first question.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[10].sendsResponse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].action.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[10].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[10].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2030775069}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2030775064}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[10].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartCode
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ObserveGrounded
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[10].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DefaultNamespace.ConversationModerator, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LLMOObserver, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[6].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      propertyPath: OnResponseActions.Array.data[9].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartFormatSummary
       objectReference: {fileID: 0}
     - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: cameraToCapture
       value: 
       objectReference: {fileID: 289805241}
-    - target: {fileID: 7210828513694691677, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: kosmosPostPrompt
-      value: Be precise, concise and truthfull. Skip formalities.
+    - target: {fileID: 6991899121046189943, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: model
+      value: gpt-4
       objectReference: {fileID: 0}
     - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: m_RootOrder
@@ -1633,28 +1580,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
---- !u!114 &2030775064 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7210828513694691677, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-  m_PrefabInstance: {fileID: 2030775063}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be00425194c867a4ebc950bf7af00268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2030775069 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-  m_PrefabInstance: {fileID: 2030775063}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9462034200d0444f9629cb3770c495c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2116521503
 GameObject:
   m_ObjectHideFlags: 0

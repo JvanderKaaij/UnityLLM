@@ -16,6 +16,9 @@ namespace OpenAIGPT
         [TextAreaAttribute]
         [SerializeField] private string preContext;
         
+        [TextAreaAttribute]
+        [SerializeField] private string afterSummaryContext;
+        
         public UnityEvent<string> OnResponse;
         private void Awake()
         {
@@ -27,7 +30,14 @@ namespace OpenAIGPT
         {
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
             LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = content });
-            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse));
+            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse) );
+        }
+
+        public void FormatSummary(string summary)
+        {
+            messagesArray = new List<GPTMessageData>();
+            messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
+            messagesArray.Add(new GPTMessageData{role = "user", content = summary});
         }
 
         public string GetLastMessage()
