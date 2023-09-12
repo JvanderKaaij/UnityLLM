@@ -55,54 +55,298 @@ MonoBehaviour:
   codeBridge: {fileID: 0}
   cliBridge: {fileID: 0}
   configPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
-  preContext: Your goal is to establish the relationship between the objects in a
-    Unity scene and come up with a possible scenario for reinforcement learning.
-    During the conversation you can skip formality. Keep it as concise as possible.
-    Ask your first question to the VQA.
-  afterQueries: Stop asking questions about the scene. Give a detailed description
+  OnResponseActions:
+  - name: Pre Context
+    context: Establish the relationship between the objects in an image by asking
+      a Visual QA Model. Keep it concise. Skip formalities. Ask your first question
+      to the VQA.
+    sendsContext: 1
+    sendsResponse: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4064262751324618855}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Observe_01
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7210828513694691677}
+          m_TargetAssemblyTypeName: LLMOObserver, Assembly-CSharp
+          m_MethodName: Observe
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Observe_02
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7210828513694691677}
+          m_TargetAssemblyTypeName: LLMOObserver, Assembly-CSharp
+          m_MethodName: Observe
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Observe_03
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7210828513694691677}
+          m_TargetAssemblyTypeName: LLMOObserver, Assembly-CSharp
+          m_MethodName: Observe
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Observe_04
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7210828513694691677}
+          m_TargetAssemblyTypeName: LLMOObserver, Assembly-CSharp
+          m_MethodName: Observe
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Observe_05
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7210828513694691677}
+          m_TargetAssemblyTypeName: LLMOObserver, Assembly-CSharp
+          m_MethodName: Observe
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Observe Grounded
+    context: 
+    sendsContext: 0
+    sendsResponse: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7210828513694691677}
+          m_TargetAssemblyTypeName: LLMOObserver, Assembly-CSharp
+          m_MethodName: ObserveGrounded
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: After Observations
+    context: Stop asking questions about the image. Give a detailed description of
+      the complete scene.
+    sendsContext: 1
+    sendsResponse: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4064262751324618855}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: RL Context
+    context: All objects are part of a Unity scene. Describe a scenario that makes
+      sense in reinforcement learning with these objects.
+    sendsContext: 1
+    sendsResponse: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4064262751324618855}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Code Request
+    context: 'Write a Unity C# code implementation of this Reinforcement Learning
+      process for the ML-Agents package. The code should train the scenario you just
+      described. Avoid user interaction. Use only the existing components. Never
+      use any prefabs. Avoid using CompareTag. Do not use the GameObject the Component
+      is added to. Always find the reference to GameObjects in the hierarchy by GameObject.Find()
+      during the Awake() function. An Agent implementation consists out of the following
+      functions:
+
+      private void Awake()
+
+      override void OnEpisodeBegin()
+
+      override
+      void CollectObservations(VectorSensor sensor)
+
+      OnActionReceived(ActionBuffers
+      actionBuffers)
+
+
+      Always Ignore implementing the Heuristic() method
+
+
+      Make
+      sure these libraries are included:
+
+      using Unity.MLAgents;
+
+      using
+      Unity.MLAgents.Sensors;
+
+      using Unity.MLAgents.Actuators;
+
+
+      Write
+      me the C# code.'
+    sendsContext: 1
+    sendsResponse: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4064262751324618855}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Code Compile
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTCSharpBridge, Assembly-CSharp
+          m_MethodName: Process
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  preContext: Establish the relationship between the objects in an image by asking
+    a Visual QA Model. Keep it concise. Skip formalities. Ask your first question
+    to the VQA.
+  afterQueries: Stop asking questions about the image. Give a detailed description
     of the complete scene.
-  addedContext: All the objects in the image are GameObjects in the a Unity scene.
-    Describe what could be a possible thing that could happen in this scene to one
-    of the objects? Take into account what Components are attached to the GameObjects.
+  addedContext: All the objects in the image are GameObjects in a Unity scene. Describe
+    what could be a possible thing that could happen in this scene to one of the
+    objects? Take into account what Components are attached to the GameObjects.
   furtherContext: Describe a scenario that makes sense in a reinforcement learning
     with the objects present.
   codeRequest: 'Write a Unity C# code implementation of this Reinforcement Learning
     process for the ML-Agents package. The code should train the scenario you just
     described. Avoid user interaction. Use only the existing components. Never use
-    any prefabs. Do not use the GameObject the Component is added to. Always find
-    the reference to GameObjects in the hierarchy by GameObject.Find() during the
-    Awake() function. An Agent implementation consists out of the following functions:
+    any prefabs. Avoid using CompareTag. Do not use the GameObject the Component
+    is added to. Always find the reference to GameObjects in the hierarchy by GameObject.Find()
+    during the Awake() function. An Agent implementation consists out of the following
+    functions:
 
-    private
-    void Awake()
+    private void Awake()
 
     override void OnEpisodeBegin()
 
-    override void CollectObservations(VectorSensor
-    sensor)
+    override
+    void CollectObservations(VectorSensor sensor)
 
-    OnActionReceived(ActionBuffers actionBuffers)
-
-
-    Always Ignore
-    implementing the Heuristic() method
+    OnActionReceived(ActionBuffers
+    actionBuffers)
 
 
-    Make sure these libraries are included:
+    Always Ignore implementing the Heuristic() method
 
-    using
-    Unity.MLAgents;
+
+    Make
+    sure these libraries are included:
+
+    using Unity.MLAgents;
 
     using Unity.MLAgents.Sensors;
 
-    using Unity.MLAgents.Actuators;
+    using
+    Unity.MLAgents.Actuators;
 
 
-    Write
-    me the C# code.'
-  codeReconsider: Improve on this code. Take into account the reward system and make
-    it more rigorous. Everything in the code should be fully implemented and working
-    C# code. Write me Unity C# code.
+    Write me the C# code.'
   hyperParameterRequest: 
 --- !u!114 &2960451226261954316
 MonoBehaviour:
@@ -155,11 +399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connector: {fileID: 6991899121046189943}
   messagesArray: []
-  preContext: 'You are having a dialogue with an VQA AI that can describe what it
-    sees on an image. The context of the image is a Unity scene. You have to figure
-    out as much detail about the picture. You can only ask single short and simple
-    questions about the image. Be formal and don''t reitterate what the VQA has replied
-    to you. '
+  preContext: You are an assistant helping coming up with a reinforcement learning
+    scenario and writing C# code.
   OnResponse:
     m_PersistentCalls:
       m_Calls: []
@@ -176,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiUrl: https://api.openai.com/v1/chat/completions
-  model: gpt-4
+  model: gpt-3.5-turbo
   temperature: 0.7
 --- !u!114 &3735422714826511522
 MonoBehaviour:

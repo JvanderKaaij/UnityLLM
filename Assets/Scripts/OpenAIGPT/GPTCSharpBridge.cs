@@ -14,6 +14,9 @@ namespace OpenAIGPT
             var codeExtract = ExtractCode(response);
             var className = GetClassName(response);
             var completeCodeExtract = AddMeta(codeExtract, className);
+            
+            Debug.Log($"Extracted CODE with Classname: {className}: {codeExtract}");
+            
             OnCodePrepared?.Invoke(completeCodeExtract, className);
         }
 

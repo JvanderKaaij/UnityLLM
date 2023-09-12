@@ -16,7 +16,7 @@ namespace DefaultNamespace
         [SerializeField] GPTCSharpBridge codeBridge;
         [SerializeField] CLIBridge cliBridge;
         [SerializeField] private string configPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
-        
+        [SerializeField] private List<GPTConversationPoint> OnResponseActions;
         
         private int counter;
         private HyperParameterConfig hyperConfig;
@@ -37,14 +37,11 @@ namespace DefaultNamespace
         [SerializeField] private string codeRequest;
         
         [TextAreaAttribute]
-        [SerializeField] private string codeReconsider;
-        
-        [TextAreaAttribute]
         [SerializeField] private string hyperParameterRequest;
         
         private void Start()
         {
-            gptConverser.CallMessage(preContext);
+            gptConverser.Prompt(preContext);
             gptConverser.OnResponse.AddListener(GPTResponse);
             observer.OnResponse.AddListener(ObserverResponse);
             observer.OnGroundedResponse.AddListener(GroundedObservationResponse);
@@ -54,31 +51,37 @@ namespace DefaultNamespace
         {
             counter++;
             Debug.Log($"Response Counter: {counter}");
+            Debug.Log($"GPT Response: {response}");
+            
             if(counter <= 5){
                 observer.Observe(response);
             }else if (counter == 6) {   
-                gptConverser.CallMessage(afterQueries);
+                gptConverser.Prompt(afterQueries);
             }else if (counter == 7){
                 observer.ObserveGrounded();
             }else if (counter == 8) {
-                gptConverser.CallMessage(addedContext);
+                //TODO summarize
+                gptConverser.Prompt(addedContext);
             }else if (counter == 9) {
-                gptConverser.CallMessage(furtherContext);
+                gptConverser.Prompt(furtherContext);
             }else if (counter == 10) { 
-                gptConverser.CallMessage(codeRequest);
+                gptConverser.Prompt(codeRequest);
             }else if (counter == 11){
-                gptConverser.CallMessage(codeReconsider);
                 cliBridge.RunMLAgentsInWSL(configPath); //Start it before compiling and running the code, as it might take a while to spin up the process
+                StartCoroutine(CompileDelay(response)); //Wait a bit for the ml-agents to start up
+
                 //TODO Add HyperParameter Flow:
                 //At end of training - read hyper parameters from config file
                 //hyperConfig = HyperParameterBridge.Read(configPath);//Read hyper parameters from config file
                 //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
                 //Store new hyperparameters in config file HyperParameterBridge.Read(object, configPath);
-                
-            }else if (counter == 12)
-            {
-                codeBridge.Process(response);
             }
+        }
+
+        private IEnumerator CompileDelay(string response)
+        {
+            yield return new WaitForSeconds(5.0f);
+            codeBridge.Process(response);
         }
 
         private void ObserverResponse(string response)
@@ -87,7 +90,7 @@ namespace DefaultNamespace
             //remote last string from response
             response = response.Replace(last, "");
             response = response.Replace(last, "");
-            gptConverser.CallMessage(response);
+            gptConverser.Prompt(response);
         }
 
         private void GroundedObservationResponse(List<Kosmos2GroundedRelation> groundedRelations)
@@ -98,7 +101,7 @@ namespace DefaultNamespace
                 relationDescription.Append(
                     $"{relation.label} could be find by the name {relation.subject.name} in the Unity Hierarchy. It contains the following Components: {relation.components}");
             }
-            gptConverser.CallMessage(relationDescription.ToString());
+            gptConverser.Prompt(relationDescription.ToString());
         }
         
     }

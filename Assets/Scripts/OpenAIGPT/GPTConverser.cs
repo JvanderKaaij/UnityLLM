@@ -19,11 +19,11 @@ namespace OpenAIGPT
         public UnityEvent<string> OnResponse;
         private void Awake()
         {
-            messagesArray.Add(new GPTMessageData { role = "user", content = preContext});
+            messagesArray.Add(new GPTMessageData { role = "system", content = preContext});
             LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = preContext});
         }
         
-        public void CallMessage(string content)
+        public void Prompt(string content)
         {
             Debug.Log($"Ask GPT: {content}");
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
@@ -49,18 +49,12 @@ namespace OpenAIGPT
         }
         
         public void AssistantResponse(GPTResponseData responseData){
-            Debug.Log($"GPT Response: {responseData.choices[0].message.content}");
-            Debug.Log($"Finish Reason: {responseData.choices[0].finish_reason}");
             Debug.Log($"Usage: prompt token: {responseData.usage.prompt_tokens} completion tokens: {responseData.usage.completion_tokens} total tokens: {responseData.usage.total_tokens}");
             
             messagesArray.Add(responseData.choices[0].message);
-            
             LLMRLMetaController.fullConversation.Add(responseData.choices[0].message);
-            
             OnResponse.Invoke(responseData.choices[0].message.content);
             
-            // bridge.Process(responseData.choices[0].message.content);
         }
-
     }
 }
