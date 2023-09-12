@@ -13,5 +13,6 @@ namespace OpenAIGPT
         public bool sendsContext;
         public bool sendsResponse;
         public UnityEvent<string> action;
+        public UnityEvent altAction;
     }
 }

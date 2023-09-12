@@ -59,7 +59,6 @@ public class LLMOObserver : MonoBehaviour
 
     private void KosmosResponse(KosmosResponseData data)
     {
-        Debug.Log($"Kosmos: {data.message}");
         OnResponse.Invoke(data.message);
     }
     

@@ -21,27 +21,10 @@ namespace DefaultNamespace
         private int counter;
         private HyperParameterConfig hyperConfig;
 
-        [TextAreaAttribute]
-        [SerializeField] private string preContext;
-        
-        [TextAreaAttribute]
-        [SerializeField] private string afterQueries;
-        
-        [TextAreaAttribute]
-        [SerializeField] private string addedContext;
-        
-        [TextAreaAttribute]
-        [SerializeField] private string furtherContext;
-        
-        [TextAreaAttribute (10, 10)]
-        [SerializeField] private string codeRequest;
-        
-        [TextAreaAttribute]
-        [SerializeField] private string hyperParameterRequest;
         
         private void Start()
         {
-            gptConverser.Prompt(preContext);
+            GPTResponse("");//Empty to kick off the flow
             gptConverser.OnResponse.AddListener(GPTResponse);
             observer.OnResponse.AddListener(ObserverResponse);
             observer.OnGroundedResponse.AddListener(GroundedObservationResponse);
@@ -49,33 +32,30 @@ namespace DefaultNamespace
 
         private void GPTResponse(string response)
         {
-            counter++;
             Debug.Log($"Response Counter: {counter}");
             Debug.Log($"GPT Response: {response}");
             
-            if(counter <= 5){
-                observer.Observe(response);
-            }else if (counter == 6) {   
-                gptConverser.Prompt(afterQueries);
-            }else if (counter == 7){
-                observer.ObserveGrounded();
-            }else if (counter == 8) {
-                //TODO summarize
-                gptConverser.Prompt(addedContext);
-            }else if (counter == 9) {
-                gptConverser.Prompt(furtherContext);
-            }else if (counter == 10) { 
-                gptConverser.Prompt(codeRequest);
-            }else if (counter == 11){
-                cliBridge.RunMLAgentsInWSL(configPath); //Start it before compiling and running the code, as it might take a while to spin up the process
-                StartCoroutine(CompileDelay(response)); //Wait a bit for the ml-agents to start up
+            var point = OnResponseActions[counter];
+            
+            if (point.sendsContext){
+                point.action.Invoke(point.context);
 
-                //TODO Add HyperParameter Flow:
-                //At end of training - read hyper parameters from config file
-                //hyperConfig = HyperParameterBridge.Read(configPath);//Read hyper parameters from config file
-                //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
-                //Store new hyperparameters in config file HyperParameterBridge.Read(object, configPath);
+            }else if (point.sendsResponse){
+                point.action.Invoke(response);
             }
+
+            if (point.altAction != null)
+            {
+                point.altAction.Invoke();
+            }
+
+            counter++;
+        }
+
+        public void StartCode(string response)
+        {
+            cliBridge.RunMLAgentsInWSL(configPath); //Start it before compiling and running the code, as it might take a while to spin up the process
+            StartCoroutine(CompileDelay(response)); //Wait a bit for the ml-agents to start up
         }
 
         private IEnumerator CompileDelay(string response)
@@ -89,7 +69,9 @@ namespace DefaultNamespace
             string last = gptConverser.GetLastMessage();
             //remote last string from response
             response = response.Replace(last, "");
-            response = response.Replace(last, "");
+            
+            Debug.Log($"Kosmos Replied to GPT: {response}");
+            
             gptConverser.Prompt(response);
         }
 

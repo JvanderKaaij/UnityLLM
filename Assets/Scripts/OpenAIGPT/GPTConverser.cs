@@ -25,7 +25,6 @@ namespace OpenAIGPT
         
         public void Prompt(string content)
         {
-            Debug.Log($"Ask GPT: {content}");
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
             LLMRLMetaController.fullConversation.Add(new GPTMessageData { role = "user", content = content });
             StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse));
