@@ -54,7 +54,8 @@ MonoBehaviour:
   gptConverser: {fileID: 4064262751324618855}
   codeBridge: {fileID: 0}
   cliBridge: {fileID: 0}
-  configPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
+  mlAgentsConfigPath: /mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml
+  tensorDataPythonPath: /home/joeyvdkaaij/kosmos/kosmos-2-patch14-224/tensor_data_reader.py
   OnResponseActions:
   - name: Pre Context
     context: Establish the relationship between objects in an image by asking questions.

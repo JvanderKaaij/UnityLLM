@@ -7,9 +7,9 @@ namespace OpenAIGPT
 {
     public class GPTCSharpBridge:MonoBehaviour
     {
-        public UnityEvent<string, string> OnCodePrepared;
+        public UnityEvent<string, string, string> OnCodePrepared;
         
-        public void Process(string response)
+        public void Process(string behaviourName, string response)
         {
             var codeExtract = ExtractCode(response);
             var className = GetClassName(response);
@@ -19,7 +19,7 @@ namespace OpenAIGPT
             
             LLMRLMetaController.currentCode = codeExtract;
             
-            OnCodePrepared?.Invoke(completeCodeExtract, className);
+            OnCodePrepared?.Invoke(behaviourName, completeCodeExtract, className);
         }
 
         private string GetClassName(string response)

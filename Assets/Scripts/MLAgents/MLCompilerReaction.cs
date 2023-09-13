@@ -8,14 +8,13 @@ namespace DefaultNamespace.MLAgents
 {
     public class MLCompilerReaction:MonoBehaviour
     {
-        [SerializeField] private string behaviourName;
         [SerializeField] private int decisionParams;
         [SerializeField] private int maxSteps;
         [SerializeField] private int vectorObservations;
         [SerializeField] private int actions;
 
         //Retrieve actions and observations amount from the code
-        public void OnCodeExtracted(string code, string className)
+        public void OnCodeExtracted(string behaviourName, string code, string className)
         {
             Debug.Log($"EXTRACTED CODE: {code}");
             actions = CountOccurrences(code, "actionBuffers.ContinuousActions");
@@ -35,7 +34,7 @@ namespace DefaultNamespace.MLAgents
             return count;
         }
         
-        public void DoneCompiling(GameObject obj)
+        public void DoneCompiling(string behaviourName, GameObject obj)
         {
             var decision = obj.AddComponent<DecisionRequester>();
             decision.DecisionPeriod = decisionParams;
@@ -45,10 +44,10 @@ namespace DefaultNamespace.MLAgents
             
             obj.AddComponent<BehaviorParameters>();
             
-            StartCoroutine(WaitFrameForStart(obj));
+            StartCoroutine(WaitFrameForStart(behaviourName, obj));
         }
 
-        IEnumerator WaitFrameForStart(GameObject obj)
+        IEnumerator WaitFrameForStart(string behaviourName, GameObject obj)
         {
             yield return new WaitForEndOfFrame();
             

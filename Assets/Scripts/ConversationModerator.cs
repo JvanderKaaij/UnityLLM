@@ -17,7 +17,9 @@ namespace DefaultNamespace
         [SerializeField] GPTConverser gptConverser;
         [SerializeField] GPTCSharpBridge codeBridge;
         [SerializeField] CLIBridge cliBridge;
-        [SerializeField] private string configPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
+        [SerializeField] private string behaviourName;
+        [SerializeField] private string mlAgentsConfigPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
+        [SerializeField] private string tensorDataPythonPath = "/home/joeyvdkaaij/kosmos/kosmos-2-patch14-224/tensor_data_reader.py";
         [SerializeField] private List<GPTConversationPoint> OnResponseActions;
 
         private string summary;
@@ -28,6 +30,7 @@ namespace DefaultNamespace
         private void Start()
         {
             LoggingController.Log($"--- NEW EPISODE -- ");
+
             GPTResponse("");//Empty to kick off the flow
             gptConverser.OnResponse.AddListener(GPTResponse);
             observer.OnResponse.AddListener(ObserverResponse);
@@ -63,22 +66,25 @@ namespace DefaultNamespace
             }
             
             //At end of training - read hyper parameters from config file
-            //hyperConfig = HyperParameterBridge.Read(configPath);//Read hyper parameters from config file
+            //hyperConfig = HyperParameterBridge.Read(mlAgentsConfigPath);//Read hyper parameters from config file
             //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
-            //Store new hyperparameters in config file HyperParameterBridge.Write(object, configPath);
+            //Store new hyperparameters in config file HyperParameterBridge.Write(object, mlAgentsConfigPath);
             
+        }
+        
+        public void ReadTensorDataResults()
+        {
+            
+            //TODO: Need to find path for the fevent file
+            //TODO: Need to format the output
+            cliBridge.RunTensorDataInWSL(tensorDataPythonPath);
         }
 
         public void StartFormatSummary()
         {
             Debug.Log("SUMMARY: ");
             Debug.Log(summary);
-            
-            
-            // TODO FIX: SOMEHOW THIS HANGS THE PLAYER????
-            
-            //Add previous run code and monitoring here 
-            
+
             LLMRLMetaController.currentSummary = summary;
             
             var previousSessionData = MetaSessionDataController.RetrieveSessionData(LLMRLMetaController.Instance.sessionPath);
@@ -98,14 +104,14 @@ namespace DefaultNamespace
 
         public void StartCode(string response)
         {
-            cliBridge.RunMLAgentsInWSL(configPath); //Start it before compiling and running the code, as it might take a while to spin up the process
+            cliBridge.RunMLAgentsInWSL(behaviourName, mlAgentsConfigPath); //Start it before compiling and running the code, as it might take a while to spin up the process
             StartCoroutine(CompileDelay(response)); //Wait a bit for the ml-agents to start up
         }
 
         private IEnumerator CompileDelay(string response)
         {
             yield return new WaitForSeconds(5.0f);
-            codeBridge.Process(response);
+            codeBridge.Process(behaviourName, response);
         }
 
         private void ObserverResponse(string response)

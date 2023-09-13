@@ -26,6 +26,6 @@ public class GPTCodeTester : MonoBehaviour
     [ContextMenu("Execute")]
     public void Execute()
     {
-        bridge.Process(code);
+        bridge.Process("testBehaviour", code);
     }
 }

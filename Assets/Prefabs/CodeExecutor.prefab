@@ -131,5 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc78f7d74316e894bbb5c3a23675ec86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualEnvPath: /usr/local/pyenv/versions/virtualenv/bin/activate
+  MLAgentsVenvPath: /usr/local/pyenv/versions/virtualenv/bin/activate
+  TensorDataVenvPath: /home/joeyvdkaaij/kosmos/kosmos-2-patch14-224/venv/bin/activate
   runID: FootBall

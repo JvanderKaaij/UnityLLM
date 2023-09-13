@@ -9,9 +9,10 @@ using Debug = UnityEngine.Debug;
 public class CLIBridge : MonoBehaviour
 {
     [SerializeField]
-    private string virtualEnvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
+    private string MLAgentsVenvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
+    
     [SerializeField]
-    private string runID = "Ballance";
+    private string TensorDataVenvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
 
     public Action ProcessDone;
     
@@ -26,12 +27,17 @@ public class CLIBridge : MonoBehaviour
         }
     }
 
-    public async void RunMLAgentsInWSL(string configPath)
+    public async void RunMLAgentsInWSL(string behaviourName, string configPath)
     {
-        await Task.Run(() => ExecuteMLAgentsProcess(configPath));
+        await Task.Run(() => ExecuteMLAgentsProcess(behaviourName, configPath));
     }
-    
-    void ExecuteMLAgentsProcess(string configPath)
+        
+    public async void RunTensorDataInWSL(string pythonPath)
+    {
+        await Task.Run(() => ExecuteTensorDataProcess(pythonPath));
+    }
+
+    void ExecuteMLAgentsProcess(string behaviourName, string configPath)
     {
         /*
          * This is the code that you need to run in order to start the ml-agents-learn command
@@ -39,14 +45,12 @@ public class CLIBridge : MonoBehaviour
          * You can retrieve the location by running pyenv prefix in the folder that the pyenv runs in
          */
         
-        Debug.Log($"Starting mlagents with configpath: {configPath} and runID: {runID}");
-        
-        string commandToRun = $"mlagents-learn {configPath} --run-id={runID} --force";
+        string commandToRun = $"mlagents-learn {configPath} --run-id={behaviourName} --force";
         
         Debug.Log("Start ML-Agents Process");
         LoggingController.Log("START ML-Agents Process");
 
-        RunCLIProcess(commandToRun, () =>
+        RunCLIProcess(MLAgentsVenvPath, commandToRun, () =>
         {
             ProcessDone?.Invoke();
             LLMRLMetaController.OnNextStep();
@@ -55,9 +59,25 @@ public class CLIBridge : MonoBehaviour
 
     }
 
-    private void RunCLIProcess(string commandToRun, Action OnDone)
+    void ExecuteTensorDataProcess(string pythonPath)
     {
-        string wslCommand = $"wsl source {virtualEnvPath} ; {commandToRun}";
+        Debug.Log($"Starting TensorData with pythonPath: {pythonPath}");
+        
+        string commandToRun = $"python {pythonPath} --path test";
+        
+        Debug.Log("Start TensorData Process");
+        LoggingController.Log("START TensorData Process");
+
+        RunCLIProcess(TensorDataVenvPath, commandToRun, () =>
+        {
+            Debug.Log("TensorData Process Ended");
+        });
+
+    }
+
+    private void RunCLIProcess(string venvPath, string commandToRun, Action OnDone)
+    {
+        string wslCommand = $"wsl source {venvPath} ; {commandToRun}";
 
         // Set up the process start info
         ProcessStartInfo psi = new ProcessStartInfo("cmd.exe", "/c " + wslCommand)

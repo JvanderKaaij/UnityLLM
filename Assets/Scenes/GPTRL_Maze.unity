@@ -1529,6 +1529,14 @@ PrefabInstance:
       propertyPath: codeBridge
       value: 
       objectReference: {fileID: 1431835679}
+    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: sessionName
+      value: FootBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
+      propertyPath: behaviourName
+      value: FootBall
+      objectReference: {fileID: 0}
     - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: cameraToCapture
       value: 

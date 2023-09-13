@@ -9,12 +9,12 @@ using UnityEngine.Events;
 
 public class RuntimeCompiler : MonoBehaviour
 {
-    public UnityEvent<GameObject> OnCompile;
+    public UnityEvent<string, GameObject> OnCompile;
     public GameObject target;
 
     public static Action CompilerError;
 
-    public void Call(string code, string className)
+    public void Call(string behaviourName, string code, string className)
     {
         var assembly = Compile(code);
         
@@ -28,7 +28,7 @@ public class RuntimeCompiler : MonoBehaviour
 
         // We ask the compiled method to add its component to this.gameObject
         var addedComponent = del.Invoke(target);
-        OnCompile.Invoke(target);
+        OnCompile.Invoke(behaviourName, target);
         // The delegate pre-bakes the reflection, so repeated calls don't
         // cost us every time, as long as we keep re-using the delegate.
     }
