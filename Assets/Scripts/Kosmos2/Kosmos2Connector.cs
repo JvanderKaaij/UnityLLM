@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -39,9 +40,10 @@ namespace Kosmos2
         {
             WWWForm form = new WWWForm();
             form.AddBinaryData("image", imageBytes);
-            
             form.AddField("prompt", prompt);
             
+            LoggingController.Log($"[KOSMOS] [user] {prompt}");
+
             using (UnityWebRequest webRequest = UnityWebRequest.Post(apiUrl, form))
             {
                 yield return webRequest.SendWebRequest();
@@ -55,6 +57,7 @@ namespace Kosmos2
                     KosmosResponseData response = JsonUtility.FromJson<KosmosResponseData>(webRequest.downloadHandler.text);
                     response.entities.ForEach(x => x.boundingBox.position = x.boundingBoxPosition);
                     ResponseCallback(response);
+                    LoggingController.Log($"[KOSMOS] [reponse] {response.message}");
                 }
             }
 

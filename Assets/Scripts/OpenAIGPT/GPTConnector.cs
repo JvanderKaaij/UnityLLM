@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Text;
 using CandyCoded.env;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -25,7 +27,9 @@ namespace OpenAIGPT
             string messagesJson = JsonUtility.ToJson(wrapper);
 
             Debug.Log(messagesJson);
-
+            
+            LoggingController.Log($"[GPT] [{wrapper.messages.Last().role}] {wrapper.messages.Last().content}");
+            
             using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(apiUrl, ""))
             {
                 //These are stored in the .env file in the root of the project
@@ -52,6 +56,7 @@ namespace OpenAIGPT
                 {
                     // Process the response
                     GPTResponseData response = JsonUtility.FromJson<GPTResponseData>(webRequest.downloadHandler.text);
+                    LoggingController.Log($"[GPT] [{response.choices[0].message.role}]: {response.choices[0].message.content}");
                     ResponseCallback?.Invoke(response);
                 }
             }

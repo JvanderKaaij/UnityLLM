@@ -27,6 +27,7 @@ namespace DefaultNamespace
         
         private void Start()
         {
+            LoggingController.Log($"--- NEW EPISODE -- ");
             GPTResponse("");//Empty to kick off the flow
             gptConverser.OnResponse.AddListener(GPTResponse);
             observer.OnResponse.AddListener(ObserverResponse);
@@ -44,6 +45,8 @@ namespace DefaultNamespace
             counter++; //has to happen right after the reference to avoid recursive calls
             Debug.Log($"Current Response Action: {point.name}");
             Debug.Log($"GPT Response: {response}");
+            
+            LoggingController.Log($"[MODERATOR] Current Response Action: {point.name}");
 
             if (point.sendsContext){
                 point.action.Invoke(point.context);
@@ -71,10 +74,25 @@ namespace DefaultNamespace
             Debug.Log("SUMMARY: ");
             Debug.Log(summary);
             
+            
+            // TODO FIX: SOMEHOW THIS HANGS THE PLAYER????
+            
             //Add previous run code and monitoring here 
             
             LLMRLMetaController.currentSummary = summary;
-            gptConverser.FormatSummary(summary);
+            
+            var previousSessionData = MetaSessionDataController.RetrieveSessionData(LLMRLMetaController.Instance.sessionPath);
+            
+            if (previousSessionData == null || previousSessionData.codeHistory.Count == 0) //no code history
+            {
+                Debug.Log("Code History NOT Present");
+                gptConverser.FormatSummary(summary);
+            }
+            else
+            {
+                Debug.Log("Code History Present - Adding to Summary");
+                gptConverser.FormatSummary(summary, previousSessionData.codeHistory.Last());
+            }
             ProcessNextPoint(summary);
         }
 

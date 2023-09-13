@@ -224,7 +224,7 @@ MonoBehaviour:
       eating grass.'
     sendsContext: 1
     sendsResponse: 0
-    addToSummary: 1
+    addToSummary: 0
     action:
       m_PersistentCalls:
         m_Calls:
@@ -296,36 +296,37 @@ MonoBehaviour:
       described. Avoid user interaction. Use only the existing components. Never
       use any prefabs. Avoid using CompareTag. Always find the reference to GameObject
       - as discussed before - in the hierarchy by GameObject.Find() during the Awake()
-      function. Never use the local transform. An Agent implementation consists out
-      of the following functions:
+      function. Never use the local GameObject itself. An Agent implementation consists
+      out of the following functions:
 
       private void Awake()
 
-      override void
-      OnEpisodeBegin()
+      override
+      void OnEpisodeBegin()
 
-      override void CollectObservations(VectorSensor sensor)
+      override void CollectObservations(VectorSensor
+      sensor)
 
-      OnActionReceived(ActionBuffers
-      actionBuffers)
-
-
-      Always Ignore implementing the Heuristic() method
+      OnActionReceived(ActionBuffers actionBuffers)
 
 
-      Make
-      sure these libraries are included:
+      Always
+      Ignore implementing the Heuristic() method
+
+
+      Make sure these libraries
+      are included:
 
       using Unity.MLAgents;
 
+      using Unity.MLAgents.Sensors;
+
       using
-      Unity.MLAgents.Sensors;
-
-      using Unity.MLAgents.Actuators;
+      Unity.MLAgents.Actuators;
 
 
-      Write
-      me the C# code.'
+      Improve on the previous session. Write me
+      the C# code.'
     sendsContext: 1
     sendsResponse: 0
     addToSummary: 0
@@ -424,7 +425,9 @@ MonoBehaviour:
   messagesArray: []
   preContext: You are an assistant asking questions about an image.
   afterSummaryContext: You are an assistant helping coming up with a reinforcement
-    learning scenario and writing C# code.
+    learning scenario and writing C# code. There has been a previously scenario.
+    Improve on that scenario.
+  previousCodePrompt: 'This is the previously generated C# code:'
   OnResponse:
     m_PersistentCalls:
       m_Calls: []

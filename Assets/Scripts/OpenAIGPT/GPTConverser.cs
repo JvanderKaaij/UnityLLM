@@ -19,6 +19,9 @@ namespace OpenAIGPT
         [TextAreaAttribute]
         [SerializeField] private string afterSummaryContext;
         
+        [TextAreaAttribute]
+        [SerializeField] private string previousCodePrompt;
+        
         public UnityEvent<string> OnResponse;
         private void Awake()
         {
@@ -28,13 +31,27 @@ namespace OpenAIGPT
         public void Prompt(string content)
         {
             messagesArray.Add(new GPTMessageData { role = "user", content = content });
-            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse) ); }
+            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse) );
+        }
 
         public void FormatSummary(string summary)
         {
             messagesArray = new List<GPTMessageData>();
             messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
-            messagesArray.Add(new GPTMessageData{role = "user", content = summary});
+            messagesArray.Add(new GPTMessageData{ role = "user", content = summary});
+        }
+        
+        public void FormatSummary(string summary, string previousCode)
+        {
+            messagesArray = new List<GPTMessageData>();
+            messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
+            messagesArray.Add(new GPTMessageData{ role = "user", content = summary});
+            messagesArray.Add(new GPTMessageData{ role = "user", content = $"{previousCodePrompt} {previousCode}"});
+            
+            LoggingController.Log($"[SUMMARY] Context: {afterSummaryContext}");
+            LoggingController.Log($"[SUMMARY] Summary: {summary}");
+            LoggingController.Log($"[SUMMARY] Code Summary: {previousCodePrompt} {previousCode}");
+            
         }
 
         public string GetLastMessage()
