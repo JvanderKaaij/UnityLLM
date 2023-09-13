@@ -15,7 +15,7 @@ public class CLIBridge : MonoBehaviour
 
     public Action ProcessDone;
     
-    private ConcurrentQueue<System.Action> mainThreadActions = new();
+    private ConcurrentQueue<Action> mainThreadActions = new();
 
     
     private void Update()
@@ -25,14 +25,13 @@ public class CLIBridge : MonoBehaviour
             action.Invoke();
         }
     }
-    
 
     public async void RunMLAgentsInWSL(string configPath)
     {
-        await Task.Run(() => ExecuteProcess(configPath));
+        await Task.Run(() => ExecuteMLAgentsProcess(configPath));
     }
     
-    void ExecuteProcess(string configPath)
+    void ExecuteMLAgentsProcess(string configPath)
     {
         /*
          * This is the code that you need to run in order to start the ml-agents-learn command
@@ -44,7 +43,20 @@ public class CLIBridge : MonoBehaviour
         
         string commandToRun = $"mlagents-learn {configPath} --run-id={runID} --force";
         
-        // Formulate the WSL command to activate pyenv virtualenv and then run the command
+        Debug.Log("Start ML-Agents Process");
+        LoggingController.Log("START ML-Agents Process");
+
+        RunCLIProcess(commandToRun, () =>
+        {
+            ProcessDone?.Invoke();
+            LLMRLMetaController.OnNextStep();
+            Debug.Log("ML-Agents Process Ended");
+        });
+
+    }
+
+    private void RunCLIProcess(string commandToRun, Action OnDone)
+    {
         string wslCommand = $"wsl source {virtualEnvPath} ; {commandToRun}";
 
         // Set up the process start info
@@ -55,33 +67,33 @@ public class CLIBridge : MonoBehaviour
             UseShellExecute = false,
             CreateNoWindow = true
         };
-        
-        Debug.Log("Start Process");
-        
+
         // Start the process
         Process process = new Process { StartInfo = psi };
-        process.Start();
         
-        string output = process.StandardOutput.ReadToEnd();
-        string errorOutput = process.StandardError.ReadToEnd();
-
-        // Log the output and errors
-        if (!string.IsNullOrEmpty(output))
-            Debug.Log(output);
-
-        if (!string.IsNullOrEmpty(errorOutput))
-            Debug.LogError(errorOutput);
-
+        process.OutputDataReceived += (sender, data) =>
+        {
+            if (!String.IsNullOrEmpty(data.Data))
+            {
+                Debug.Log(data.Data);
+            }
+        };
+            
+        process.ErrorDataReceived += (sender, data) =>
+        {
+            if (!String.IsNullOrEmpty(data.Data))
+            {
+                Debug.Log("ERROR: " + data.Data);
+            }
+        };
+        
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
         process.WaitForExit();
         
         //As we're in another Thread I need to Queue the Action into the mainThread
-        mainThreadActions.Enqueue(() =>
-        {
-            ProcessDone?.Invoke();
-            LLMRLMetaController.OnNextStep();
-        });
-        
-        //RESTART NEXT
-        Debug.Log("Process Ended");
+        mainThreadActions.Enqueue(OnDone);
     }
+    
 }
