@@ -6,6 +6,7 @@ using System.Text;
 using Kosmos2;
 using MLAgents;
 using OpenAIGPT;
+using TensorData;
 using Unity.MLAgents;
 using UnityEngine;
 
@@ -18,15 +19,17 @@ namespace DefaultNamespace
         [SerializeField] GPTCSharpBridge codeBridge;
         [SerializeField] CLIBridge cliBridge;
         [SerializeField] private string behaviourName;
+        [SerializeField] private string resultsPath = "/mnt/d/UserProjects/Joey/Unity/UnityLLM/results";
         [SerializeField] private string mlAgentsConfigPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
-        [SerializeField] private string tensorDataPythonPath = "/home/joeyvdkaaij/kosmos/kosmos-2-patch14-224/tensor_data_reader.py";
         [SerializeField] private List<GPTConversationPoint> OnResponseActions;
+        [SerializeField] private TensorDataConnector tensorDataConnector;
 
         private string summary;
         private int counter;
         private HyperParameterConfig hyperConfig;
-        
-        
+
+        private string FEventsPath => $"{resultsPath}/{behaviourName}/{behaviourName}/";
+
         private void Start()
         {
             LoggingController.Log($"--- NEW EPISODE -- ");
@@ -42,7 +45,7 @@ namespace DefaultNamespace
             ProcessNextPoint(response);
         }
 
-        private void ProcessNextPoint(string response)
+        private void ProcessNextPoint(string response = "")
         {
             var point = OnResponseActions[counter];
             counter++; //has to happen right after the reference to avoid recursive calls
@@ -64,42 +67,42 @@ namespace DefaultNamespace
             {
                 point.altAction.Invoke();
             }
+        }
+       
+        public void StartFormatSummary()
+        {
+            LLMRLMetaController.currentSummary = summary;//TODO should be moved
+            StartCoroutine(CollectSummary());
+        }
+        
+        //I'm creating a "promise" training summary here - never assume every aspect of the summary is filled in
+        private IEnumerator CollectSummary()
+        {
+            var trainingSummary = new TrainingSummary();
+            trainingSummary.contextSummary = summary;
+            
+            var previousSessionData = MetaSessionDataController.RetrieveSessionData(LLMRLMetaController.Instance.sessionPath);
+            
+            if (previousSessionData?.codeHistory.Count > 0) // has code history
+            {
+                trainingSummary.previousCode = previousSessionData.codeHistory.Last();
+            }
+
+            yield return tensorDataConnector.RequestTensorData(FEventsPath, (prevData) =>
+            {
+                trainingSummary.previousTensorData = prevData;
+            });
+            
+            Debug.Log(trainingSummary);
             
             //At end of training - read hyper parameters from config file
             //hyperConfig = HyperParameterBridge.Read(mlAgentsConfigPath);//Read hyper parameters from config file
             //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
             //Store new hyperparameters in config file HyperParameterBridge.Write(object, mlAgentsConfigPath);
             
-        }
-        
-        public void ReadTensorDataResults()
-        {
+            gptConverser.PrepareSummary(trainingSummary);
             
-            //TODO: Need to find path for the fevent file
-            //TODO: Need to format the output
-            cliBridge.RunTensorDataInWSL(tensorDataPythonPath);
-        }
-
-        public void StartFormatSummary()
-        {
-            Debug.Log("SUMMARY: ");
-            Debug.Log(summary);
-
-            LLMRLMetaController.currentSummary = summary;
-            
-            var previousSessionData = MetaSessionDataController.RetrieveSessionData(LLMRLMetaController.Instance.sessionPath);
-            
-            if (previousSessionData == null || previousSessionData.codeHistory.Count == 0) //no code history
-            {
-                Debug.Log("Code History NOT Present");
-                gptConverser.FormatSummary(summary);
-            }
-            else
-            {
-                Debug.Log("Code History Present - Adding to Summary");
-                gptConverser.FormatSummary(summary, previousSessionData.codeHistory.Last());
-            }
-            ProcessNextPoint(summary);
+            ProcessNextPoint();
         }
 
         public void StartCode(string response)

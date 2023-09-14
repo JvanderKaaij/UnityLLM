@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6991899121046189943}
   - component: {fileID: 3735422714826511522}
   - component: {fileID: 7681936313815082217}
+  - component: {fileID: 6554702497056379328}
   m_Layer: 0
   m_Name: Observer
   m_TagString: Untagged
@@ -54,8 +55,9 @@ MonoBehaviour:
   gptConverser: {fileID: 4064262751324618855}
   codeBridge: {fileID: 0}
   cliBridge: {fileID: 0}
-  mlAgentsConfigPath: /mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml
-  tensorDataPythonPath: /home/joeyvdkaaij/kosmos/kosmos-2-patch14-224/tensor_data_reader.py
+  behaviourName: FootBall
+  resultsPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/results
+  mlAgentsConfigPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
   OnResponseActions:
   - name: Pre Context
     context: Establish the relationship between objects in an image by asking questions.
@@ -372,6 +374,7 @@ MonoBehaviour:
     altAction:
       m_PersistentCalls:
         m_Calls: []
+  tensorDataConnector: {fileID: 6554702497056379328}
 --- !u!114 &2960451226261954316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +432,7 @@ MonoBehaviour:
     learning scenario and writing C# code. There has been a previously scenario.
     Improve on that scenario.
   previousCodePrompt: 'This is the previously generated C# code:'
+  previousTensorDataPrompt: 'This is the Tensor Data of the previous training:'
   OnResponse:
     m_PersistentCalls:
       m_Calls: []
@@ -473,3 +477,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiUrl: http://localhost:8005/process_prompt
+--- !u!114 &6554702497056379328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289443186264156805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669f4f7e60834646939509f064b2bad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: http://localhost:8006/request

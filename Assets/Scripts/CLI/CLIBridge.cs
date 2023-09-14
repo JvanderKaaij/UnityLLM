@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DefaultNamespace;
@@ -10,9 +11,6 @@ public class CLIBridge : MonoBehaviour
 {
     [SerializeField]
     private string MLAgentsVenvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
-    
-    [SerializeField]
-    private string TensorDataVenvPath = "/usr/local/pyenv/versions/virtualenv/bin/activate";
 
     public Action ProcessDone;
     
@@ -31,11 +29,6 @@ public class CLIBridge : MonoBehaviour
     {
         await Task.Run(() => ExecuteMLAgentsProcess(behaviourName, configPath));
     }
-        
-    public async void RunTensorDataInWSL(string pythonPath)
-    {
-        await Task.Run(() => ExecuteTensorDataProcess(pythonPath));
-    }
 
     void ExecuteMLAgentsProcess(string behaviourName, string configPath)
     {
@@ -50,32 +43,20 @@ public class CLIBridge : MonoBehaviour
         Debug.Log("Start ML-Agents Process");
         LoggingController.Log("START ML-Agents Process");
 
-        RunCLIProcess(MLAgentsVenvPath, commandToRun, () =>
+        RunCLIProcess(MLAgentsVenvPath, commandToRun,
+        (x) =>
+        {
+            Debug.Log(x);
+        },
+        () =>
         {
             ProcessDone?.Invoke();
             LLMRLMetaController.OnNextStep();
             Debug.Log("ML-Agents Process Ended");
         });
-
     }
 
-    void ExecuteTensorDataProcess(string pythonPath)
-    {
-        Debug.Log($"Starting TensorData with pythonPath: {pythonPath}");
-        
-        string commandToRun = $"python {pythonPath} --path test";
-        
-        Debug.Log("Start TensorData Process");
-        LoggingController.Log("START TensorData Process");
-
-        RunCLIProcess(TensorDataVenvPath, commandToRun, () =>
-        {
-            Debug.Log("TensorData Process Ended");
-        });
-
-    }
-
-    private void RunCLIProcess(string venvPath, string commandToRun, Action OnDone)
+    private void RunCLIProcess(string venvPath, string commandToRun, Action<string> OnData, Action OnDone)
     {
         string wslCommand = $"wsl source {venvPath} ; {commandToRun}";
 
@@ -95,7 +76,7 @@ public class CLIBridge : MonoBehaviour
         {
             if (!String.IsNullOrEmpty(data.Data))
             {
-                Debug.Log(data.Data);
+                OnData(data.Data.Trim());
             }
         };
             

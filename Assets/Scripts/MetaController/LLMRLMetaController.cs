@@ -76,7 +76,7 @@ namespace DefaultNamespace
         public void NextStep()
         {
             Debug.Log($"GOT NEXT STEP");
-            StoreData();
+            StoreData(); //TODO can be moved to happen after ConversationModerator generated them?
             //With previous code, previous hyper params and monitoring, start a new run
             EditorCoroutine.Run(Restart());
         }
