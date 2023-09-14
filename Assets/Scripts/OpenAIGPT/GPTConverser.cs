@@ -46,15 +46,15 @@ namespace OpenAIGPT
             messagesArray = new List<GPTMessageData>();
             messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
             StringBuilder summaryText = new StringBuilder();
-            summaryText.Append($"{previousCodePrompt}: {summary.previousCode}");
+            summaryText.Append($"{previousCodePrompt}: {summary.previousCode}\n");
 
             if (summary.previousTensorData.HasData())
             {
-                summaryText.Append(previousTensorDataPrompt);
+                summaryText.Append($"{previousTensorDataPrompt}\n");
                 summaryText.Append(summary.previousTensorData);
             }
 
-            summaryText.Append(previousHyperParameterPrompt);
+            summaryText.Append($"{previousHyperParameterPrompt}\n");
             summaryText.Append(summary.previousHyperParams);
             
             Debug.Log("Constructed Summary:");

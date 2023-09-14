@@ -14,22 +14,28 @@ namespace MLAgents
         public CheckpointSettings checkpoint_settings { get; set; }
         public TorchSettings torch_settings { get; set; }
         public bool debug { get; set; }
+
+
+        public Behavior FirstBehavior()
+        {
+            return behaviors.First().Value;
+        }
         
         public override string ToString()
         {
-            var hp = behaviors.First().Value.hyperparameters;
+            var hp = FirstBehavior().hyperparameters;
             var result = new StringBuilder();
-            result.Append($"batch_size: {hp.batch_size}");
-            result.Append($"buffer_size: {hp.buffer_size}");
-            result.Append($"learning_rate: {hp.learning_rate}");
-            result.Append($"beta: {hp.beta}");
-            result.Append($"epsilon: {hp.epsilon}");
-            result.Append($"lambd: {hp.lambd}");
-            result.Append($"num_epoch: {hp.num_epoch}");
-            result.Append($"shared_critic: {hp.shared_critic}");
-            result.Append($"learning_rate_schedule: {hp.learning_rate_schedule}");
-            result.Append($"beta_schedule: {hp.beta_schedule}");
-            result.Append($"epsilon_schedule: {hp.epsilon_schedule}");
+            result.Append($"batch_size: {hp.batch_size}\n");
+            result.Append($"buffer_size: {hp.buffer_size}\n");
+            result.Append($"learning_rate: {hp.learning_rate}\n");
+            result.Append($"beta: {hp.beta}\n");
+            result.Append($"epsilon: {hp.epsilon}\n");
+            result.Append($"lambd: {hp.lambd}\n");
+            result.Append($"num_epoch: {hp.num_epoch}\n");
+            result.Append($"shared_critic: {hp.shared_critic}\n");
+            result.Append($"learning_rate_schedule: {hp.learning_rate_schedule}\n");
+            result.Append($"beta_schedule: {hp.beta_schedule}\n");
+            result.Append($"epsilon_schedule: {hp.epsilon_schedule}\n");
             return result.ToString();
         }
         

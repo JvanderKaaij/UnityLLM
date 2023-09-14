@@ -439,17 +439,6 @@ MonoScript:
   m_ClassName: AcademyFixedUpdateStepper
   m_Namespace: Unity.MLAgents
   m_AssemblyName: Unity.ML-Agents
---- !u!114 &812400029 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-  m_PrefabInstance: {fileID: 2030775063}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9462034200d0444f9629cb3770c495c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1043350806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,69 +1530,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1431835679}
     - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.size
-      value: 13
+      propertyPath: OnResponseActions.Array.data[10].context
+      value: Suggest better fitting HyperParameters. Could you format them in a way
+        that's easy to parse as JSON.
       objectReference: {fileID: 0}
     - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[11].name
-      value: Hyper Param Request
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].name
-      value: Code Compile
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[11].context
-      value: Suggest better fitting HyperParameters.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[11].sendsContext
+      propertyPath: OnResponseActions.Array.data[10].sendsResponse
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[11].sendsResponse
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].sendsResponse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].action.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 812400029}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[11].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyHyperParameters
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartCode
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DefaultNamespace.ConversationModerator, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416821057603845968, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: OnResponseActions.Array.data[12].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3735422714826511522, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: cameraToCapture
       value: 
       objectReference: {fileID: 289805241}
-    - target: {fileID: 4064262751324618855, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
-      propertyPath: previousHyperParameterPrompt
-      value: 'These are the HyperParameters used in the previous training:'
-      objectReference: {fileID: 0}
     - target: {fileID: 7557431135012212090, guid: 127bbe6a85b309e499bc24d2fe3bb350, type: 3}
       propertyPath: m_RootOrder
       value: 3

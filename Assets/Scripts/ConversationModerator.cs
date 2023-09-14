@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Kosmos2;
 using MLAgents;
 using OpenAIGPT;
@@ -21,9 +23,11 @@ namespace DefaultNamespace
         [SerializeField] private string behaviourName;
         [SerializeField] private string resultsPath = "/mnt/d/UserProjects/Joey/Unity/UnityLLM/results";
         [SerializeField] private string mlAgentsConfigPath = "/mnt/d/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
+        [SerializeField] private string hyperParamPath = "D:/UserProjects/Joey/Unity/ML_Demos/Config/ballance_plate_config.yaml";
         [SerializeField] private List<GPTConversationPoint> OnResponseActions;
         [SerializeField] private TensorDataConnector tensorDataConnector;
 
+        TrainingSummary trainingSummary;
         private string summary;
         private int counter;
 
@@ -77,7 +81,6 @@ namespace DefaultNamespace
         //I'm creating a "promise" training summary here - never assume every aspect of the summary is filled in
         private IEnumerator CollectSummary()
         {
-            var trainingSummary = new TrainingSummary();
             trainingSummary.contextSummary = summary;
             
             var previousSessionData = MetaSessionDataController.RetrieveSessionData(LLMRLMetaController.Instance.sessionPath);
@@ -93,7 +96,7 @@ namespace DefaultNamespace
             });
 
 
-            trainingSummary.previousHyperParams = HyperParameterBridge.Read(mlAgentsConfigPath);
+            trainingSummary.previousHyperParams = HyperParameterBridge.Read(hyperParamPath);
 
             Debug.Log(trainingSummary);
             
@@ -103,11 +106,26 @@ namespace DefaultNamespace
 
         public void ApplyHyperParameters(string response)
         {
-            
+            Debug.Log("Suggested Hyper Parameters:");
             Debug.Log(response);
+            Match match = Regex.Match(response, @"```json\s*(.*?)```", RegexOptions.Singleline);
+            
+            if (match.Success)
+            {
+                var newHyperParameters = match.Groups[1].Value.Trim();
+                Debug.Log("FOUND HYPER PARAMS:");
+                Debug.Log(newHyperParameters);
+                Hyperparameters hyperParameter = JsonUtility.FromJson<Hyperparameters>(newHyperParameters);
+                var newParams = trainingSummary.previousHyperParams;
+                newParams.FirstBehavior().hyperparameters = hyperParameter;
+                HyperParameterBridge.Write(newParams, hyperParamPath);
+            }
+            else
+            {
+                Debug.LogWarning("Could not parse suggested hyper parameters!");
+            }
             
             // To Write the new hyper parameters
-            // HyperParameterBridge.Write(object, mlAgentsConfigPath);
             ProcessNextPoint();
         }
 

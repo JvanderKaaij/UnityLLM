@@ -26,12 +26,12 @@ public class TensorDataList
     {
         var rewards = OrderedRewards();
         var result = new StringBuilder();
-        result.Append("Rewards over time: ");
+        result.Append("Rewards over time: \n");
         foreach (var reward in rewards)
         {
             result.Append($", {reward.simple_value}");
         }
-        result.Append("\nEpisode Lengths over time: ");
+        result.Append("\nEpisode Lengths over time: \n");
         var lengths = OrderedEpisodeLengths();
         foreach (var length in lengths)
         {

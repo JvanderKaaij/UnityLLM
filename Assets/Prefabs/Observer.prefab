@@ -58,6 +58,7 @@ MonoBehaviour:
   behaviourName: FootBall
   resultsPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/results
   mlAgentsConfigPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
+  hyperParamPath: D:/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
   OnResponseActions:
   - name: Pre Context
     context: Establish the relationship between objects in an image by asking questions.
@@ -293,6 +294,53 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: Hyper Param Request
+    context: Suggest better fitting HyperParameters. Could you format them in a way
+      that's easy to parse as JSON.
+    sendsContext: 1
+    sendsResponse: 1
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4064262751324618855}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Apply Hyper Params
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1416821057603845968}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: ApplyHyperParameters
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Code Request
     context: 'Write a Unity C# code implementation of this Reinforcement Learning
       process for the ML-Agents package. The code should train the scenario you just
@@ -351,33 +399,10 @@ MonoBehaviour:
     altAction:
       m_PersistentCalls:
         m_Calls: []
-  - name: Hyper Param Request
-    context: Suggest better fitting HyperParameters.
-    sendsContext: 1
-    sendsResponse: 0
-    addToSummary: 0
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1416821057603845968}
-          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
-          m_MethodName: ApplyHyperParameters
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    altAction:
-      m_PersistentCalls:
-        m_Calls: []
   - name: Code Compile
     context: 
     sendsContext: 0
-    sendsResponse: 1
+    sendsResponse: 0
     addToSummary: 0
     action:
       m_PersistentCalls:
