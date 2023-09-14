@@ -72,6 +72,18 @@ namespace MLAgents
         public string learning_rate_schedule { get; set; }
         public string beta_schedule { get; set; }
         public string epsilon_schedule { get; set; }
+
+        
+        //Note that I'm not overwriting every parameter here
+        public void ApplyNew(Hyperparameters newParams)
+        {
+            batch_size = newParams.batch_size;
+            buffer_size = newParams.buffer_size;
+            learning_rate = newParams.learning_rate;
+            beta = newParams.beta;
+            epsilon = newParams.epsilon;
+            lambd = newParams.lambd;
+        }
     }
 
     public class NetworkSettings

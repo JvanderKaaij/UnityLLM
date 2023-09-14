@@ -104,6 +104,11 @@ namespace DefaultNamespace
             ProcessNextPoint();
         }
 
+        public void TestHyperApply()
+        {
+            
+        }
+
         public void ApplyHyperParameters(string response)
         {
             Debug.Log("Suggested Hyper Parameters:");
@@ -116,8 +121,8 @@ namespace DefaultNamespace
                 Debug.Log("FOUND HYPER PARAMS:");
                 Debug.Log(newHyperParameters);
                 Hyperparameters hyperParameter = JsonUtility.FromJson<Hyperparameters>(newHyperParameters);
-                var newParams = trainingSummary.previousHyperParams;
-                newParams.FirstBehavior().hyperparameters = hyperParameter;
+                 var newParams = trainingSummary.previousHyperParams;
+                newParams.FirstBehavior().hyperparameters.ApplyNew(hyperParameter);
                 HyperParameterBridge.Write(newParams, hyperParamPath);
             }
             else

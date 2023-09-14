@@ -1,13 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
     [ExecuteInEditMode]
-    [InitializeOnLoad]
     public class LLMRLMetaController:MonoBehaviour
     {
         public static string currentCode;
@@ -17,19 +14,17 @@ namespace DefaultNamespace
         
         private bool continueLoop = true;
 
-        static LLMRLMetaController mInstance;
+        public static LLMRLMetaController Instance;
  
-        public static LLMRLMetaController Instance
+        private void Awake()
         {
-            get
+            if (Instance == null)
             {
-                if (mInstance == null)
-                {
-                    RuntimeCompiler.CompilerError += OnRestart;
-                    Application.logMessageReceived += OnLog;
-                    mInstance = new();
-                }
-                return mInstance;
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
             }
         }
         
