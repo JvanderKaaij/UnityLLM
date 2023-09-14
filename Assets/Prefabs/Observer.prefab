@@ -351,6 +351,29 @@ MonoBehaviour:
     altAction:
       m_PersistentCalls:
         m_Calls: []
+  - name: Hyper Param Request
+    context: Suggest better fitting HyperParameters.
+    sendsContext: 1
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1416821057603845968}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: ApplyHyperParameters
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Code Compile
     context: 
     sendsContext: 0
@@ -433,6 +456,8 @@ MonoBehaviour:
     Improve on that scenario.
   previousCodePrompt: 'This is the previously generated C# code:'
   previousTensorDataPrompt: 'This is the Tensor Data of the previous training:'
+  previousHyperParameterPrompt: 'These are the HyperParameters used in the previous
+    training:'
   OnResponse:
     m_PersistentCalls:
       m_Calls: []

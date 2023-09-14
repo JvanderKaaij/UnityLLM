@@ -26,7 +26,6 @@ namespace DefaultNamespace
 
         private string summary;
         private int counter;
-        private HyperParameterConfig hyperConfig;
 
         private string FEventsPath => $"{resultsPath}/{behaviourName}/{behaviourName}/";
 
@@ -92,16 +91,23 @@ namespace DefaultNamespace
             {
                 trainingSummary.previousTensorData = prevData;
             });
-            
+
+
+            trainingSummary.previousHyperParams = HyperParameterBridge.Read(mlAgentsConfigPath);
+
             Debug.Log(trainingSummary);
             
-            //At end of training - read hyper parameters from config file
-            //hyperConfig = HyperParameterBridge.Read(mlAgentsConfigPath);//Read hyper parameters from config file
-            //Share observation and ask new hyperparameters from GPT (hyperParameterRequest)
-            //Store new hyperparameters in config file HyperParameterBridge.Write(object, mlAgentsConfigPath);
-            
             gptConverser.PrepareSummary(trainingSummary);
+            ProcessNextPoint();
+        }
+
+        public void ApplyHyperParameters(string response)
+        {
             
+            Debug.Log(response);
+            
+            // To Write the new hyper parameters
+            // HyperParameterBridge.Write(object, mlAgentsConfigPath);
             ProcessNextPoint();
         }
 

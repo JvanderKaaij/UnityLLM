@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 [Serializable]
 public class TensorDataItem
@@ -16,7 +17,30 @@ public class TensorDataList
 {
     public TensorDataItem[] message;
 
-    public List<TensorDataItem> OrderedRewards()
+    public bool HasData()
+    {
+        return message.Length > 0;
+    }
+    
+    public override string ToString()
+    {
+        var rewards = OrderedRewards();
+        var result = new StringBuilder();
+        result.Append("Rewards over time: ");
+        foreach (var reward in rewards)
+        {
+            result.Append($", {reward.simple_value}");
+        }
+        result.Append("\nEpisode Lengths over time: ");
+        var lengths = OrderedEpisodeLengths();
+        foreach (var length in lengths)
+        {
+            result.Append($", {length.simple_value}");
+        }
+        return result.ToString();
+    }
+    
+    private List<TensorDataItem> OrderedRewards()
     {
         List<TensorDataItem> rewards = message
             .Where(t => t.tag == "Environment/Cumulative Reward")
@@ -25,7 +49,7 @@ public class TensorDataList
         return rewards;
     }
     
-    public List<TensorDataItem> OrderedEpisodeLengths()
+    private List<TensorDataItem> OrderedEpisodeLengths()
     {
         List<TensorDataItem> episodeLengths = message
                 .Where(t => t.tag == "Environment/Episode Length")

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text;
+using Unity.XR.CoreUtils;
 
 namespace MLAgents
 {
@@ -12,6 +14,25 @@ namespace MLAgents
         public CheckpointSettings checkpoint_settings { get; set; }
         public TorchSettings torch_settings { get; set; }
         public bool debug { get; set; }
+        
+        public override string ToString()
+        {
+            var hp = behaviors.First().Value.hyperparameters;
+            var result = new StringBuilder();
+            result.Append($"batch_size: {hp.batch_size}");
+            result.Append($"buffer_size: {hp.buffer_size}");
+            result.Append($"learning_rate: {hp.learning_rate}");
+            result.Append($"beta: {hp.beta}");
+            result.Append($"epsilon: {hp.epsilon}");
+            result.Append($"lambd: {hp.lambd}");
+            result.Append($"num_epoch: {hp.num_epoch}");
+            result.Append($"shared_critic: {hp.shared_critic}");
+            result.Append($"learning_rate_schedule: {hp.learning_rate_schedule}");
+            result.Append($"beta_schedule: {hp.beta_schedule}");
+            result.Append($"epsilon_schedule: {hp.epsilon_schedule}");
+            return result.ToString();
+        }
+        
     }
 
     public class Behavior

@@ -25,6 +25,9 @@ namespace OpenAIGPT
         [TextAreaAttribute]
         [SerializeField] private string previousTensorDataPrompt;
         
+        [TextAreaAttribute]
+        [SerializeField] private string previousHyperParameterPrompt;
+        
         public UnityEvent<string> OnResponse;
         private void Awake()
         {
@@ -42,7 +45,21 @@ namespace OpenAIGPT
         {
             messagesArray = new List<GPTMessageData>();
             messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
-            messagesArray.Add(new GPTMessageData{ role = "user", content = summary.contextSummary});
+            StringBuilder summaryText = new StringBuilder();
+            summaryText.Append($"{previousCodePrompt}: {summary.previousCode}");
+
+            if (summary.previousTensorData.HasData())
+            {
+                summaryText.Append(previousTensorDataPrompt);
+                summaryText.Append(summary.previousTensorData);
+            }
+
+            summaryText.Append(previousHyperParameterPrompt);
+            summaryText.Append(summary.previousHyperParams);
+            
+            Debug.Log("Constructed Summary:");
+            Debug.Log(summaryText.ToString());
+            messagesArray.Add(new GPTMessageData{ role = "user", content = summaryText.ToString()});
         }
 
         public string GetLastMessage()
