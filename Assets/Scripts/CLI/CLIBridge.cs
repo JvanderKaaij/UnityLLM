@@ -46,12 +46,14 @@ public class CLIBridge : MonoBehaviour
         RunCLIProcess(MLAgentsVenvPath, commandToRun,
         (x) =>
         {
+            LoggingController.Log($"[CLI LOG] {x}");
             Debug.Log(x);
         },
         () =>
         {
             ProcessDone?.Invoke();
             LLMRLMetaController.OnNextStep();
+            LoggingController.Log($"[CLI LOG] ML-Agents Process Ended");
             Debug.Log("ML-Agents Process Ended");
         });
     }

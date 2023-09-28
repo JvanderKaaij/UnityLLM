@@ -30,6 +30,7 @@ namespace DefaultNamespace
         TrainingSummary trainingSummary;
         private string summary;
         private int counter;
+        private string codeResponse;
 
         private string FEventsPath => $"{resultsPath}/{behaviourName}/{behaviourName}/";
 
@@ -103,12 +104,6 @@ namespace DefaultNamespace
             gptConverser.PrepareSummary(trainingSummary);
             ProcessNextPoint();
         }
-
-        public void TestHyperApply()
-        {
-            
-        }
-
         public void ApplyHyperParameters(string response)
         {
             Debug.Log("Suggested Hyper Parameters:");
@@ -134,10 +129,16 @@ namespace DefaultNamespace
             ProcessNextPoint();
         }
 
-        public void StartCode(string response)
+        public void StoreCode(string response)
+        {
+            codeResponse = response;
+            ProcessNextPoint();
+        }
+        
+        public void StartCode()
         {
             cliBridge.RunMLAgentsInWSL(behaviourName, mlAgentsConfigPath); //Start it before compiling and running the code, as it might take a while to spin up the process
-            StartCoroutine(CompileDelay(response)); //Wait a bit for the ml-agents to start up
+            StartCoroutine(CompileDelay(codeResponse)); //Wait a bit for the ml-agents to start up
         }
 
         private IEnumerator CompileDelay(string response)

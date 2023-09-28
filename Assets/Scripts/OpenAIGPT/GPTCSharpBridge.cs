@@ -64,7 +64,7 @@ namespace OpenAIGPT
                 return match.Groups[1].Value.Trim();
             }
             
-            pattern = @"```C#([\s\S]*?)```";
+            pattern = @"```Csharp([\s\S]*?)```";
             match = Regex.Match(response, pattern);
             
             if (match.Success)
@@ -72,6 +72,14 @@ namespace OpenAIGPT
                 return match.Groups[1].Value.Trim();
             }
             
+            pattern = @"```C#([\s\S]*?)```";
+            match = Regex.Match(response, pattern);
+            
+            if (match.Success)
+            {
+                return match.Groups[1].Value.Trim();
+            }
+
             // Else it might be it's just code and nothing else.
             if (response.Contains("MonoBehaviour") || response.Contains("Agent"))
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
@@ -16,7 +17,7 @@ namespace DefaultNamespace
             if (Instance == null)
             {
                 Instance = this;
-                Instance.filename = $"logging_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.txt";
+                Instance.filename = $"logging_{SceneManager.GetActiveScene().name}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.txt";
                 DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)

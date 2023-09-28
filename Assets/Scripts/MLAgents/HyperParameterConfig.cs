@@ -58,22 +58,22 @@ namespace MLAgents
         public object self_play { get; set; }
         public object behavioral_cloning { get; set; }
     }
-
+    
+    [System.Serializable]
     public class Hyperparameters
     {
-        public int batch_size { get; set; }
-        public int buffer_size { get; set; }
-        public double learning_rate { get; set; }
-        public double beta { get; set; }
-        public double epsilon { get; set; }
-        public double lambd { get; set; }
-        public int num_epoch { get; set; }
-        public bool shared_critic { get; set; }
-        public string learning_rate_schedule { get; set; }
-        public string beta_schedule { get; set; }
-        public string epsilon_schedule { get; set; }
+        public int batch_size;
+        public int buffer_size;
+        public double learning_rate;
+        public double beta;
+        public double epsilon;
+        public double lambd;
+        public int num_epoch;
+        public bool shared_critic;
+        public string learning_rate_schedule;
+        public string beta_schedule;
+        public string epsilon_schedule;
 
-        
         //Note that I'm not overwriting every parameter here
         public void ApplyNew(Hyperparameters newParams)
         {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Blip;
+using DefaultNamespace;
 using Kosmos2;
 using LLMObservation;
 using OpenAIGPT;
@@ -44,6 +45,7 @@ public class LLMOObserver : MonoBehaviour
     private void KosmosGroundedResponse(KosmosResponseData data)
     {
         Debug.Log($"Grounded Kosmos: {data.message}");
+        LoggingController.Log($"[Grounded Kosmos]: {data.message}");
         foreach (var entity in data.entities)
         {
             var gObj = FindObjectsIn2DBoundingBox(entity.boundingBox);

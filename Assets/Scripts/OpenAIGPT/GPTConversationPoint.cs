@@ -8,7 +8,7 @@ namespace OpenAIGPT
     public class GPTConversationPoint
     {
         public string name;
-        [TextAreaAttribute]
+        [TextAreaAttribute (20,100)]
         public string context;
         public bool sendsContext;
         public bool sendsResponse;

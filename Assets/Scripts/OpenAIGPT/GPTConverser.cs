@@ -46,7 +46,14 @@ namespace OpenAIGPT
             messagesArray = new List<GPTMessageData>();
             messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
             StringBuilder summaryText = new StringBuilder();
-            summaryText.Append($"{previousCodePrompt}: {summary.previousCode}\n");
+
+            summaryText.Append($"{summary.contextSummary}\n");
+            
+            // DISABLED CODE HISTORY AS IT'S STEERING TOO MUCH
+            
+            // if(summary.previousCode?.Length > 0){
+            //     summaryText.Append($"{previousCodePrompt}: {summary.previousCode}\n");
+            // }
 
             if (summary.previousTensorData.HasData())
             {
@@ -54,11 +61,14 @@ namespace OpenAIGPT
                 summaryText.Append(summary.previousTensorData);
             }
 
-            summaryText.Append($"{previousHyperParameterPrompt}\n");
+            summaryText.Append($"\n{previousHyperParameterPrompt}\n");
             summaryText.Append(summary.previousHyperParams);
             
             Debug.Log("Constructed Summary:");
             Debug.Log(summaryText.ToString());
+            
+            LoggingController.Log($"[SUMMARY]: {summaryText}");
+            
             messagesArray.Add(new GPTMessageData{ role = "user", content = summaryText.ToString()});
         }
 

@@ -294,13 +294,94 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: Code Request
+    context: 'Write a Unity C# code implementation of this Reinforcement Learning
+      process for the ML-Agents package. The code should train the scenario you just
+      described. Avoid user interaction. Use only the existing components. Never
+      use any prefabs. Ignore hyperparameters in the code. Only use one single class.
+      Avoid using CompareTag. Always find the reference to GameObject - as discussed
+      before - in the hierarchy by GameObject.Find() during the Awake() function.
+      Never use the local GameObject itself. An Agent implementation consists out
+      of the following functions:
+
+      private void Awake()
+
+      override void
+      OnEpisodeBegin()
+
+      override void CollectObservations(VectorSensor sensor)
+
+      OnActionReceived(ActionBuffers
+      actionBuffers)
+
+
+      Always Ignore implementing the Heuristic() method
+
+
+      Make
+      sure these libraries are included:
+
+      using Unity.MLAgents;
+
+      using
+      Unity.MLAgents.Sensors;
+
+      using Unity.MLAgents.Actuators;
+
+
+      Improve
+      on the previous session. Write me the C# code.'
+    sendsContext: 1
+    sendsResponse: 1
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4064262751324618855}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Code Storage
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1416821057603845968}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: StoreCode
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
   - name: Hyper Param Request
     context: "Suggest better fitting HyperParameters. Could you format them in a
       way that's easy to parse as JSON. Only use the following parameters:\n     
-      batch_size: 1024\r\n      buffer_size: 10240\r\n      learning_rate: 0.01\r\n     
-      beta: 0.0001\r\n      epsilon: 0.2\r\n      lambd: 0.95\r\n      num_epoch:
-      6\r\n      shared_critic: false\r\n      learning_rate_schedule: linear\r\n     
-      beta_schedule: linear\r\n      epsilon_schedule: linear"
+      \n```json\nbatch_size: 1024\r\n      buffer_size: 10240\r\n      learning_rate:
+      0.01\r\n      beta: 0.0001\r\n      epsilon: 0.2\r\n      lambd: 0.95\r\n     
+      num_epoch: 6\r\n      shared_critic: false\r\n      learning_rate_schedule:
+      linear\r\n      beta_schedule: linear\r\n      epsilon_schedule: linear\n```"
     sendsContext: 1
     sendsResponse: 1
     addToSummary: 0
@@ -345,76 +426,21 @@ MonoBehaviour:
     altAction:
       m_PersistentCalls:
         m_Calls: []
-  - name: Code Request
-    context: 'Write a Unity C# code implementation of this Reinforcement Learning
-      process for the ML-Agents package. The code should train the scenario you just
-      described. Avoid user interaction. Use only the existing components. Never
-      use any prefabs. Avoid using CompareTag. Always find the reference to GameObject
-      - as discussed before - in the hierarchy by GameObject.Find() during the Awake()
-      function. Never use the local GameObject itself. An Agent implementation consists
-      out of the following functions:
-
-      private void Awake()
-
-      override
-      void OnEpisodeBegin()
-
-      override void CollectObservations(VectorSensor
-      sensor)
-
-      OnActionReceived(ActionBuffers actionBuffers)
-
-
-      Always
-      Ignore implementing the Heuristic() method
-
-
-      Make sure these libraries
-      are included:
-
-      using Unity.MLAgents;
-
-      using Unity.MLAgents.Sensors;
-
-      using
-      Unity.MLAgents.Actuators;
-
-
-      Improve on the previous session. Write me
-      the C# code.'
-    sendsContext: 1
+  - name: Code Compile
+    context: 
+    sendsContext: 0
     sendsResponse: 0
     addToSummary: 0
     action:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4064262751324618855}
-          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
-          m_MethodName: Prompt
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    altAction:
-      m_PersistentCalls:
         m_Calls: []
-  - name: Code Compile
-    context: 
-    sendsContext: 0
-    sendsResponse: 1
-    addToSummary: 0
-    action:
+    altAction:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1416821057603845968}
           m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
           m_MethodName: StartCode
-          m_Mode: 0
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -423,9 +449,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    altAction:
-      m_PersistentCalls:
-        m_Calls: []
   tensorDataConnector: {fileID: 6554702497056379328}
 --- !u!114 &2960451226261954316
 MonoBehaviour:
