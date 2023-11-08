@@ -32,6 +32,8 @@ namespace DefaultNamespace
         private int counter;
         private string codeResponse;
 
+        public static bool RUNNING;
+        
         private string FEventsPath => $"{resultsPath}/{behaviourName}/{behaviourName}/";
 
         private void Start()
@@ -90,6 +92,11 @@ namespace DefaultNamespace
             {
                 trainingSummary.previousCode = previousSessionData.codeHistory.Last();
             }
+            
+            if (previousSessionData?.errorHistory.Count > 0) // has code error history
+            {
+                trainingSummary.previousCodeError = previousSessionData.errorHistory.Last();
+            }
 
             yield return tensorDataConnector.RequestTensorData(FEventsPath, (prevData) =>
             {
@@ -139,6 +146,7 @@ namespace DefaultNamespace
         {
             cliBridge.RunMLAgentsInWSL(behaviourName, mlAgentsConfigPath); //Start it before compiling and running the code, as it might take a while to spin up the process
             StartCoroutine(CompileDelay(codeResponse)); //Wait a bit for the ml-agents to start up
+            ConversationModerator.RUNNING = true;
         }
 
         private IEnumerator CompileDelay(string response)
@@ -164,7 +172,7 @@ namespace DefaultNamespace
             foreach (var relation in groundedRelations)
             {
                 relationDescription.Append(
-                    $"{relation.label} could be find by the name {relation.subject.name} in the Unity Hierarchy. It contains the following Components: {relation.components}");
+                    $"{relation.label} could be found by the name {relation.subject.name} in Unity's hierarchy. It contains the following Components: {relation.components}. These components {relation.exposedComponents} contain the following exposed methods: {relation.exposedMethods}\n");
             }
             gptConverser.Prompt(relationDescription.ToString());
             summary += relationDescription.ToString();

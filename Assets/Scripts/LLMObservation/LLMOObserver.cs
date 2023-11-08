@@ -39,13 +39,14 @@ public class LLMOObserver : MonoBehaviour
 
     public void ObserveGrounded()
     {
-        StartCoroutine(kosmosConnector.InterpretImage(cameraImageCapture.Capture(), "<grounding>As detailed as possible: An image of", KosmosGroundedResponse));
+        StartCoroutine(kosmosConnector.InterpretImage(cameraImageCapture.Capture(), "<grounding>Return all objects as detailed as possible: An image of", KosmosGroundedResponse));
     }
 
     private void KosmosGroundedResponse(KosmosResponseData data)
     {
         Debug.Log($"Grounded Kosmos: {data.message}");
         LoggingController.Log($"[Grounded Kosmos]: {data.message}");
+
         foreach (var entity in data.entities)
         {
             var gObj = FindObjectsIn2DBoundingBox(entity.boundingBox);
@@ -53,7 +54,13 @@ public class LLMOObserver : MonoBehaviour
             if (gObj)
             {
                 Debug.Log($"Object Found: {entity.label}");
-                groundedRelations.Add(new Kosmos2GroundedRelation(){label = entity.label, subject = gObj, components = hierarchyExplorer.GetComponentDescription(gObj)});
+                groundedRelations.Add(new Kosmos2GroundedRelation
+                {
+                    label = entity.label, subject = gObj,
+                    components = hierarchyExplorer.GetComponentDescription(gObj),
+                    exposedMethods = hierarchyExplorer.GetExposedMethods(gObj),
+                    exposedComponents = hierarchyExplorer.GetExposedComponents(gObj)
+                });
             }
         }
         OnGroundedResponse.Invoke(groundedRelations);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 using UnityEngine;
 
@@ -11,13 +12,15 @@ namespace DefaultNamespace.MLAgents
         [SerializeField] private int decisionParams;
         [SerializeField] private int maxSteps;
         [SerializeField] private int vectorObservations;
-        [SerializeField] private int actions;
+        [SerializeField] private int continouousActions;
+        [SerializeField] private int discreteActions;
 
         //Retrieve actions and observations amount from the code
         public void OnCodeExtracted(string behaviourName, string code, string className)
         {
             Debug.Log($"EXTRACTED CODE: {code}");
-            actions = CountOccurrences(code, "actionBuffers.ContinuousActions");
+            continouousActions = CountOccurrences(code, "actionBuffers.ContinuousActions");
+            discreteActions = CountOccurrences(code, "actionBuffers.DiscreteActions");
             vectorObservations = CountOccurrences(code, "sensor.AddObservation");//TODO What type of Observation?
         }
         
@@ -55,9 +58,15 @@ namespace DefaultNamespace.MLAgents
             behaviour.BehaviorName = behaviourName;
             behaviour.BrainParameters.VectorObservationSize = vectorObservations * 3;//To support Vector3's this should actually be dependant on the type of Observation
             var behaveActionSpecs = behaviour.BrainParameters.ActionSpec;
-            behaveActionSpecs.NumContinuousActions = actions;
+            behaveActionSpecs.NumContinuousActions = continouousActions;
+            behaveActionSpecs.BranchSizes = new int[discreteActions];
+            for (int i = 0; i < discreteActions; i++)
+            {
+                behaveActionSpecs.BranchSizes[i] = 1;
+            }
             behaviour.BrainParameters.ActionSpec = behaveActionSpecs;
             behaviour.InferenceDevice = InferenceDevice.GPU;
+            
             try
             {
                 //TODO: Not working the try catch!

@@ -72,6 +72,14 @@ namespace OpenAIGPT
                 return match.Groups[1].Value.Trim();
             }
             
+            pattern = @"```c#([\s\S]*?)```";
+            match = Regex.Match(response, pattern);
+            
+            if (match.Success)
+            {
+                return match.Groups[1].Value.Trim();
+            }
+            
             pattern = @"```C#([\s\S]*?)```";
             match = Regex.Match(response, pattern);
             

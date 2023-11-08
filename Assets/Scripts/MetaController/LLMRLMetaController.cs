@@ -9,6 +9,7 @@ namespace DefaultNamespace
     {
         public static string currentCode;
         public static string currentSummary;
+        public static string currentErrors;
 
         public string sessionPath = "D:/UserProjects/Joey/Unity/UnityLLM/results/session.json";
         
@@ -91,6 +92,7 @@ namespace DefaultNamespace
             var data = MetaSessionDataController.RetrieveSessionData(Instance.sessionPath);
             data.codeHistory.Add(currentCode);
             data.summaryHistory.Add(currentSummary);
+            data.errorHistory.Add(currentErrors);
             MetaSessionDataController.Save(Instance.sessionPath, data);
         }
 

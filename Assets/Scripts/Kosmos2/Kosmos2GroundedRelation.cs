@@ -8,5 +8,7 @@ namespace Kosmos2
         public string label;
         public GameObject subject;
         public string components;
+        public string exposedMethods;
+        public string exposedComponents;
     }
 }

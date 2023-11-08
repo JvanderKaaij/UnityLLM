@@ -2,8 +2,8 @@ using System;
 using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Text;
+using DefaultNamespace;
 using Microsoft.CSharp;
-using OpenAIGPT;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,8 +11,6 @@ public class RuntimeCompiler : MonoBehaviour
 {
     public UnityEvent<string, GameObject> OnCompile;
     public GameObject target;
-
-    public static Action CompilerError;
 
     public void Call(string behaviourName, string code, string className)
     {
@@ -44,6 +42,7 @@ public class RuntimeCompiler : MonoBehaviour
         
         // System namespace for common types like collections.
         param.ReferencedAssemblies.Add("System.dll");
+        param.ReferencedAssemblies.Add("D:/UserProjects/Joey/Unity/UnityLLM/Library/ScriptAssemblies/Assembly-CSharp.dll");
         param.ReferencedAssemblies.Add("C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll");
         param.ReferencedAssemblies.Add("C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputLegacyModule.dll");
         param.ReferencedAssemblies.Add("C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll");
@@ -75,7 +74,9 @@ public class RuntimeCompiler : MonoBehaviour
 
             if (!canContinue)
             {
-                CompilerError?.Invoke();
+                //TODO Pass error to future run
+                LLMRLMetaController.currentErrors = msg.ToString();
+                LoggingController.Log($"[COMPILE ERROR!]: {msg}");
                 Debug.Log($"Compiler error: {msg}");
             }
         }

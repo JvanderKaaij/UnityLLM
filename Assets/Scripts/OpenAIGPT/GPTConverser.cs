@@ -54,8 +54,11 @@ namespace OpenAIGPT
             // if(summary.previousCode?.Length > 0){
             //     summaryText.Append($"{previousCodePrompt}: {summary.previousCode}\n");
             // }
+            
+            //TODO Add previous errors
+            summaryText.Append($"The previous generated C# code had the following errors: {summary.previousCodeError}. Avoid them this time.\n");
 
-            if (summary.previousTensorData.HasData())
+            if (summary.previousTensorData != null && summary.previousTensorData.HasData())
             {
                 summaryText.Append($"{previousTensorDataPrompt}\n");
                 summaryText.Append(summary.previousTensorData);

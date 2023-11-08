@@ -28,7 +28,7 @@ namespace OpenAIGPT
 
             Debug.Log(messagesJson);
             
-            LoggingController.Log($"[GPT] [{wrapper.messages.Last().role}] {wrapper.messages.Last().content}");
+            LoggingController.Log($"[{model}] [{wrapper.messages.Last().role}] {wrapper.messages.Last().content}");
             
             using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(apiUrl, ""))
             {
@@ -55,6 +55,7 @@ namespace OpenAIGPT
                 else
                 {
                     // Process the response
+                    Debug.Log("On GPT Respond");
                     GPTResponseData response = JsonUtility.FromJson<GPTResponseData>(webRequest.downloadHandler.text);
                     LoggingController.Log($"[GPT] [{response.choices[0].message.role}]: {response.choices[0].message.content}");
                     ResponseCallback?.Invoke(response);
