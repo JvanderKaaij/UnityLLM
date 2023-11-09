@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OpenAIGPT
 {
@@ -7,6 +8,7 @@ namespace OpenAIGPT
     {
         public float temperature;
         public string model;
+        public int max_tokens;
         public GPTMessageData[] messages;
     }
 
@@ -14,6 +16,22 @@ namespace OpenAIGPT
     public class GPTMessageData
     {
         public string role;
-        public string content;
+        public List<GPTMessageContentType> content;
+        //TODO Retrieve 
     }
+    
+    [Serializable]
+    public class GPTMessageContentType
+    {
+        public string type;
+        public string text;
+        public GPTImageURL image_url;
+    }
+    
+    [Serializable]
+    public class GPTImageURL
+    {
+        public string url;
+    }
+    
 }

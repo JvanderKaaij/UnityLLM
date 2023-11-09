@@ -18,7 +18,7 @@ public class InputUI : MonoBehaviour
     private void OnSend()
     {
         Debug.Log("Press Button");
-        converser.Prompt(inputField.text);
+        converser.SinglePrompt(inputField.text);
         converser.OnResponse.AddListener(resp => responseText.text = resp);
     }
     

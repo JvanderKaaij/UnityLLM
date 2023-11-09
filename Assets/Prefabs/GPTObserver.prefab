@@ -1,0 +1,359 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8906709967356246288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3591425087689489186}
+  - component: {fileID: 3061621707852844993}
+  - component: {fileID: 6519744376288012764}
+  - component: {fileID: 1796488356814410370}
+  - component: {fileID: 4916824396126243491}
+  - component: {fileID: 7294648904132013808}
+  - component: {fileID: 7889866181086160046}
+  - component: {fileID: 7972808840288218855}
+  m_Layer: 0
+  m_Name: GPTObserver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3591425087689489186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3061621707852844993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9462034200d0444f9629cb3770c495c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observer: {fileID: 0}
+  gptConverser: {fileID: 1796488356814410370}
+  codeBridge: {fileID: 0}
+  cliBridge: {fileID: 0}
+  behaviourName: FootBall
+  resultsPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/results
+  mlAgentsConfigPath: /mnt/d/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
+  hyperParamPath: D:/UserProjects/Joey/Unity/UnityLLM/Config/football_maze_config.yaml
+  OnResponseActions:
+  - name: Pre Context
+    context: You are in the process of constructing code for a Reinforcement Learning
+      training. You first get your information by asking questions to a Visual Q&A
+      Model. In a later part you will write that code. Keep it concise. Skip formalities.
+      Ask your first question.
+    sendsContext: 1
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1796488356814410370}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Send Image
+    context: 
+    sendsContext: 0
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    altAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7889866181086160046}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTImageObserver, Assembly-CSharp
+          m_MethodName: ObserveCameraImage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: After Observations
+    context: Stop asking questions about the image. Give a detailed description of
+      the complete scenario.
+    sendsContext: 1
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1796488356814410370}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: RL Context
+    context: All objects are part of a Unity scene. From the previous answers describe
+      a scenario that makes sense in reinforcement learning with these objects. Describe
+      in detail how the reward systems would work and all the things that could happen
+      that requires a reset of the episode.
+    sendsContext: 1
+    sendsResponse: 0
+    addToSummary: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1796488356814410370}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Format Summary
+    context: 
+    sendsContext: 0
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    altAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3061621707852844993}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: StartFormatSummary
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Code Request
+    context: "Write a Unity C# code implementation of this Reinforcement Learning
+      process for the ML-Agents package. The code should train the scenario you just
+      described. Avoid user interaction. Use only the existing components. Never
+      use any prefabs. Ignore hyperparameters in the code. Only use one single class.
+      Avoid using CompareTag. Always find the reference to GameObject in Unity's
+      hierarchy by GameObject.Find() during the Awake() function. Never use the local
+      GameObject the script is added to itself, the Agent is always an external GameObject.
+      Make sure to use and subscribe to all the exposed methods. Only subscribe to
+      Actions in the Start() function. Only the methods described are present no
+      other methods are available in the exposed classes. \n\nAn Agent implementation
+      consists out of the following functions:\nprivate void Awake()\noverride void
+      OnEpisodeBegin()\noverride void CollectObservations(VectorSensor sensor)\nOnActionReceived(ActionBuffers
+      actionBuffers)\n\nAlways Ignore implementing the Heuristic() method\n\nMake
+      sure these libraries are included:\nusing Unity.MLAgents;\nusing Unity.MLAgents.Sensors;\nusing
+      Unity.MLAgents.Actuators;\n\nFully write the C# code."
+    sendsContext: 1
+    sendsResponse: 1
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1796488356814410370}
+          m_TargetAssemblyTypeName: OpenAIGPT.GPTConverser, Assembly-CSharp
+          m_MethodName: Prompt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Code Storage
+    context: 
+    sendsContext: 0
+    sendsResponse: 1
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3061621707852844993}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: StoreCode
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    altAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Code Compile
+    context: 
+    sendsContext: 0
+    sendsResponse: 0
+    addToSummary: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    altAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3061621707852844993}
+          m_TargetAssemblyTypeName: DefaultNamespace.ConversationModerator, Assembly-CSharp
+          m_MethodName: StartCode
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  tensorDataConnector: {fileID: 7972808840288218855}
+--- !u!114 &6519744376288012764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bdb2ff55da64265bd35306b018addbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1796488356814410370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c466801a49b46cca5312c0b2396a38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connector: {fileID: 4916824396126243491}
+  messagesArray: []
+  preContext: You are an assistant asking questions about an image.
+  afterSummaryContext: You are an assistant helping coming up with a reinforcement
+    learning scenario and writing C# code. There has been a previously scenario.
+    Improve on that scenario.
+  previousCodePrompt: 'This is the previously generated C# code:'
+  previousTensorDataPrompt: 'This is the Tensor Data of the previous training:'
+  previousHyperParameterPrompt: 'These are the HyperParameters used in the previous
+    training:'
+  OnResponse:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4916824396126243491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e76a4d14a2cc7478bac3a9e7cde0eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: https://api.openai.com/v1/chat/completions
+  model: gpt-3.5-turbo
+  image_model: gpt-4-vision-preview
+  temperature: 0.7
+--- !u!114 &7294648904132013808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de199c8490af4efa802ba0467456412a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraToCapture: {fileID: 0}
+--- !u!114 &7889866181086160046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c984113cf610400c95cc3c8e7baba87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageCapture: {fileID: 7294648904132013808}
+--- !u!114 &7972808840288218855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906709967356246288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669f4f7e60834646939509f064b2bad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: http://localhost:8006/request

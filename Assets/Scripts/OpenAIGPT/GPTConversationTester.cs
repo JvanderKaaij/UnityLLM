@@ -11,7 +11,7 @@ public class GPTConversationTester : MonoBehaviour
    [ContextMenu("Send Text")]
    public void SendText()
    {
-      converser.Prompt(message);
+      converser.SinglePrompt(message);
       message = "";
    }
 

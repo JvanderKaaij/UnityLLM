@@ -1593,7 +1593,7 @@ PrefabInstance:
     - target: {fileID: 1796488356814410370, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: preContext
       value: You are an assistant constructing logic for a Reinforcement Learning
-        training in Unity's MLAgents package.
+        training in Unity's MLAgents package. Give concise and clear answers.
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: cliBridge
@@ -1605,7 +1605,7 @@ PrefabInstance:
       objectReference: {fileID: 1431835679}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.size
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[0].name
@@ -1613,19 +1613,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[1].name
-      value: After Observations
+      value: Describe Scene Hierarchy
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[2].name
-      value: RL Context
+      value: Write Code
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[3].name
-      value: Code Request
+      value: Execute Code
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].name
-      value: Store Code
+      value: Execute Code
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[5].name
@@ -1641,17 +1641,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[1].context
-      value: Give a detailed description of the complete scenario on the image.
+      value: 'The scene''s hierarchy contains the following objects:
+
+
+        Ball
+        with Component: SoccerBallController.cs -> AddForce(Vector3 force) &  SubscribeToDeathEvent(Action
+        response) & SubscribeToOnGoalEvent(Action response)
+
+
+        Goal
+
+
+        GoalKeeper
+        with Component: GoalKeeper.cs -> SetRandomPosition()'
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[2].context
-      value: All objects are part of a Unity scene. From the previous answers describe
-        a scenario that makes sense in reinforcement learning with these objects.
-        Describe in detail how the reward systems would work and all the things that
-        could happen that requires a reset of the episode.
-      objectReference: {fileID: 0}
-    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
-      propertyPath: OnResponseActions.Array.data[3].context
       value: "Write a Unity C# code implementation of this Reinforcement Learning
         process for the ML-Agents package. The code should train the scenario you
         just described. Avoid user interaction. Use only the existing components.
@@ -1666,8 +1671,12 @@ PrefabInstance:
         void Awake()\noverride void OnEpisodeBegin()\noverride void CollectObservations(VectorSensor
         sensor)\nOnActionReceived(ActionBuffers actionBuffers)\n\nAlways Ignore implementing
         the Heuristic() method\n\nMake sure these libraries are included:\nusing
-        Unity.MLAgents;\nusing Unity.MLAgents.Sensors;\nusing Unity.MLAgents.Actuators;\n\nFully
-        write the C# code."
+        Unity.MLAgents;\nusing Unity.MLAgents.Sensors;\nusing Unity.MLAgents.Actuators;\n\nAnswer
+        with a fully written C# code implementation."
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].context
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].context
@@ -1687,10 +1696,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[2].addToSummary
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].sendsContext
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[3].addToSummary
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].sendsContext
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
@@ -1703,6 +1720,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[6].sendsContext
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].sendsResponse
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
@@ -1730,6 +1751,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].action.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1750,6 +1779,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].altAction.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -1762,8 +1799,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[5].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1778,6 +1823,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4064262750401293168}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4064262750401293168}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1416821057218548807}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1416821057218548807}
@@ -1787,6 +1840,18 @@ PrefabInstance:
       objectReference: {fileID: 1416821057218548807}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[0].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[1].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
@@ -1805,6 +1870,18 @@ PrefabInstance:
       propertyPath: OnResponseActions.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[1].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4064262750401293168}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1416821057218548807}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1416821057218548807}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1826,8 +1903,16 @@ PrefabInstance:
       value: Prompt
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Prompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartCodeDirectly
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StoreCode
+      value: StartCodeDirectly
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[5].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1839,6 +1924,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[0].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
@@ -1854,6 +1947,22 @@ PrefabInstance:
       value: ObserveCameraImage
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[1].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Prompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartCode
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartCode
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[4].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartCode
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[5].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartCode
       objectReference: {fileID: 0}
@@ -1866,6 +1975,14 @@ PrefabInstance:
       value: OpenAIGPT.GPTConverser, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OpenAIGPT.GPTConverser, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DefaultNamespace.ConversationModerator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[4].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DefaultNamespace.ConversationModerator, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -1876,6 +1993,18 @@ PrefabInstance:
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[0].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OpenAIGPT.GPTImageObserver, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[1].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OpenAIGPT.GPTConverser, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DefaultNamespace.ConversationModerator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DefaultNamespace.ConversationModerator, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[5].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1899,6 +2028,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
       propertyPath: OnResponseActions.Array.data[0].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[2].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}
+      propertyPath: OnResponseActions.Array.data[3].altAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3061621707852844993, guid: 2a2c18fc35d98774cbd858919c8bbaa7, type: 3}

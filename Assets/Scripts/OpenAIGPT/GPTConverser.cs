@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DefaultNamespace;
 using TMPro;
@@ -28,23 +30,46 @@ namespace OpenAIGPT
         [TextAreaAttribute]
         [SerializeField] private string previousHyperParameterPrompt;
         
+        [SerializeField] private string gpt_model = "gpt-4"; //gpt-3.5-turbo";
+        
+        [SerializeField] private string gpt_image_model = "gpt-4-vision-preview"; //gpt-3.5-turbo";
+        
         public UnityEvent<string> OnResponse;
         private void Awake()
         {
-            messagesArray.Add(new GPTMessageData { role = "system", content = preContext});
+            SinglePrompt(preContext, "system");
         }
         
         public void Prompt(string content)
         {
-            messagesArray.Add(new GPTMessageData { role = "user", content = content });
-            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse) );
+            SinglePrompt(content);
+        }
+        
+        public void SinglePrompt(string content, string role="user")
+        {
+            Debug.Log($"Try and Prompt with {content}");
+            var contents = new List<GPTMessageContentType> { new GPTMessageContentType() { type = "text", text = content }};
+            messagesArray.Add(new GPTMessageData { role = role, content = contents});
+            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse, gpt_image_model) );
+        }
+        
+        public void PromptImage(byte[] image)
+        {
+            //Note that it's possible to send more images at the same time
+            
+            string imageEncoded = Convert.ToBase64String(image);
+            Debug.Log(imageEncoded);
+            GPTImageURL image_url = new GPTImageURL{url=$"data:image/png;base64,{imageEncoded}"};
+            var contents = new List<GPTMessageContentType> { new GPTMessageContentType() { type = "image_url", image_url = image_url }};
+            messagesArray.Add(new GPTMessageData { role = "user", content = contents });
+            StartCoroutine(connector.SendWebRequest(messagesArray.ToArray(), AssistantResponse, gpt_image_model) );
         }
         
         //Removes previous conversation, places a summary and possible previous data. To prepare for code and hyper parameter request
         public void PrepareSummary(TrainingSummary summary)
         {
             messagesArray = new List<GPTMessageData>();
-            messagesArray.Add(new GPTMessageData { role = "system", content = afterSummaryContext});
+            SinglePrompt(afterSummaryContext, "system");
             StringBuilder summaryText = new StringBuilder();
 
             summaryText.Append($"{summary.contextSummary}\n");
@@ -71,13 +96,14 @@ namespace OpenAIGPT
             Debug.Log(summaryText.ToString());
             
             LoggingController.Log($"[SUMMARY]: {summaryText}");
-            
-            messagesArray.Add(new GPTMessageData{ role = "user", content = summaryText.ToString()});
+            SinglePrompt(summaryText.ToString());
         }
 
         public string GetLastMessage()
         {
-            return messagesArray[messagesArray.Count - 1].content;
+            //TODO Not sure of this yet! What is this used for again?
+            // return messagesArray[messagesArray.Count - 1].content.Last().text;
+            return "Not used atm";
         }
         
         [ContextMenu("Export")]
@@ -94,8 +120,8 @@ namespace OpenAIGPT
         
         public void AssistantResponse(GPTResponseData responseData){
             Debug.Log($"Usage: prompt token: {responseData.usage.prompt_tokens} completion tokens: {responseData.usage.completion_tokens} total tokens: {responseData.usage.total_tokens}");
-            messagesArray.Add(responseData.choices[0].message);
-            OnResponse.Invoke(responseData.choices[0].message.content);
+            messagesArray.Add(responseData.choices[0].message.ToGPTMessageData());
+            OnResponse.Invoke(responseData.choices[0].message.content);//TODO I think this is fine as it's only a response
         }
     }
 }

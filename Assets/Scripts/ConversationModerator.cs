@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,7 +7,6 @@ using Kosmos2;
 using MLAgents;
 using OpenAIGPT;
 using TensorData;
-using Unity.MLAgents;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -40,10 +37,11 @@ namespace DefaultNamespace
         {
             LoggingController.Log($"--- NEW EPISODE -- ");
 
-            GPTResponse("");//Empty to kick off the flow
+            // GPTResponse("");//Empty to kick off the flow
             gptConverser.OnResponse.AddListener(GPTResponse);
-            observer.OnResponse.AddListener(ObserverResponse);
-            observer.OnGroundedResponse.AddListener(GroundedObservationResponse);
+            //TODO: Disabled for refactor to GPT Image
+            //observer.OnResponse.AddListener(ObserverResponse);
+            //observer.OnGroundedResponse.AddListener(GroundedObservationResponse);
         }
 
         private void GPTResponse(string response)
@@ -58,7 +56,7 @@ namespace DefaultNamespace
             Debug.Log($"Current Response Action: {point.name}");
             Debug.Log($"GPT Response: {response}");
             
-            LoggingController.Log($"[MODERATOR] Current Response Action: {point.name}");
+            LoggingController.Log($" - Process Next Point - [MODERATOR] Current Response Action: {point.name}");
 
             if (point.sendsContext){
                 point.action.Invoke(point.context);
@@ -142,6 +140,15 @@ namespace DefaultNamespace
             ProcessNextPoint();
         }
         
+        public void StartCodeDirectly(string response)
+        {
+            LoggingController.Log($" - Start Code Directly - [MODERATOR] CODE: {response}");
+
+            cliBridge.RunMLAgentsInWSL(behaviourName, mlAgentsConfigPath);
+            StartCoroutine(CompileDelay(response));
+            ConversationModerator.RUNNING = true;
+        }
+        
         public void StartCode()
         {
             cliBridge.RunMLAgentsInWSL(behaviourName, mlAgentsConfigPath); //Start it before compiling and running the code, as it might take a while to spin up the process
@@ -163,7 +170,7 @@ namespace DefaultNamespace
             
             Debug.Log($"Kosmos Replied to GPT: {response}");
             
-            gptConverser.Prompt(response);
+            gptConverser.SinglePrompt(response);
         }
 
         private void GroundedObservationResponse(List<Kosmos2GroundedRelation> groundedRelations)
@@ -174,7 +181,7 @@ namespace DefaultNamespace
                 relationDescription.Append(
                     $"{relation.label} could be found by the name {relation.subject.name} in Unity's hierarchy. It contains the following Components: {relation.components}. These components {relation.exposedComponents} contain the following exposed methods: {relation.exposedMethods}\n");
             }
-            gptConverser.Prompt(relationDescription.ToString());
+            gptConverser.SinglePrompt(relationDescription.ToString());
             summary += relationDescription.ToString();
         }
         

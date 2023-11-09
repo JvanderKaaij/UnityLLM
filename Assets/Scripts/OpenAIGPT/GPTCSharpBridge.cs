@@ -7,7 +7,7 @@ namespace OpenAIGPT
 {
     public class GPTCSharpBridge:MonoBehaviour
     {
-        public UnityEvent<string, string, string> OnCodePrepared;
+        public UnityEvent<string, string, string> OnCodePrepared; //Connected in editor
         
         public void Process(string behaviourName, string response)
         {
