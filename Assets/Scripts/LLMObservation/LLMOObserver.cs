@@ -84,13 +84,34 @@ public class LLMOObserver : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             GameObject foundObject = hit.collider.gameObject;
-            return foundObject;
+            
+            Debug.Log("Looking for GPTExpose Class");
+            var objWithClass = FindComponentInParentWithAttribute(foundObject);
+            
+            Debug.Log($"FOUND GPTEXPOSE CLASS: {objWithClass.name}");
+            return objWithClass;
         }
         else
         {
             Debug.Log("No object found in the given bounding box.");
             return null;
         }
+    }
+    
+    private GameObject FindComponentInParentWithAttribute(GameObject gameObject)
+    {
+        if (gameObject == null) return null;
+
+        foreach (var component in gameObject.GetComponents<MonoBehaviour>())
+        {
+            var attributes = component.GetType().GetCustomAttributes(typeof(GPTExposeAttribute), true);
+            if (attributes.Length > 0)
+            {
+                return gameObject;
+            }
+        }
+
+        return FindComponentInParentWithAttribute(gameObject.transform.parent?.gameObject);
     }
     
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoonlanderFeet : MonoBehaviour
@@ -10,6 +7,6 @@ public class MoonlanderFeet : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        moonlander.FeetHitFloor();
+        Debug.Log("Landed");
     }
 }

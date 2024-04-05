@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GoalKeeper : MonoBehaviour
+public class RandomPosition : MonoBehaviour
 {
    public Vector2 posRange;
 

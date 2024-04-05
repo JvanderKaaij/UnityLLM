@@ -50,7 +50,6 @@ namespace OpenAIGPT
                 webRequest.SetRequestHeader("Content-Type", "application/json");
                 webRequest.SetRequestHeader("Authorization", $"Bearer {authorizationToken}");
                 webRequest.SetRequestHeader("OpenAI-Organization", organisationID);
-                webRequest.SetRequestHeader("OpenAI-Organization", organisationID);
 
                 byte[] jsonBytes = Encoding.UTF8.GetBytes(messagesJson);
                 webRequest.uploadHandler = new UploadHandlerRaw(jsonBytes);

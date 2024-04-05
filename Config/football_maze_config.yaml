@@ -3,20 +3,20 @@ behaviors:
   FootBall:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 10
-      buffer_size: 100
-      learning_rate: 3.0e-4
-      beta: 5.0e-4
-      epsilon: 0.2
+      batch_size: 1024
+      buffer_size: 10240
+      learning_rate: 1.0e-4
+      beta: 1.0e-3
+      epsilon: 0.85
       lambd: 0.99
-      num_epoch: 3
+      num_epoch: 6
       learning_rate_schedule: linear
       beta_schedule: constant
       epsilon_schedule: linear
     network_settings:
       normalize: false
       hidden_units: 128
-      num_layers: 2
+      num_layers: 3
     reward_signals:
       extrinsic:
         gamma: 0.99
@@ -24,7 +24,7 @@ behaviors:
     init_path: 
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 6000000
+    max_steps: 20000000
     time_horizon: 64
     summary_freq: 5000
     threaded: false

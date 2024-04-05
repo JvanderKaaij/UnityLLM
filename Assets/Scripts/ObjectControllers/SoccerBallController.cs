@@ -8,18 +8,21 @@ public class SoccerBallController : MonoBehaviour
 
     private Action OnDeath;
     private Action OnGoal;
+    private Action OnHitWall;
 
     private Vector3 startPosition;
 
+    private Vector3 m_force;
+
     private void Start()
     {
-        startPosition = transform.position;
+        startPosition = rigidBody.position;
     }
 
     [GPTExpose]
     public void AddForce(Vector3 force)
     {
-        rigidBody.AddForce(new Vector3(Mathf.Clamp(force.x, -1.0f, 1.0f), 0, Mathf.Clamp(force.z, -1.0f, 1.0f)), ForceMode.Force);
+        m_force = new Vector3(Mathf.Clamp(force.x, -1.0f, 1.0f), 0, Mathf.Clamp(force.z, -1.0f, 1.0f));
     }
     
     [GPTExpose]
@@ -35,20 +38,39 @@ public class SoccerBallController : MonoBehaviour
         OnGoal = null;
         OnGoal += response;
     }
+    
+    [GPTExpose]
+    public void SubscribeToOnHitWallEvent(Action response)
+    {
+        OnHitWall = null;
+        OnHitWall += response;
+    }
 
     [GPTExpose]
     public void Reset()
     {
-        transform.position = startPosition;
+        rigidBody.position = startPosition;
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.angularVelocity = Vector3.zero;
     }
     
     private void OnCollisionStay(Collision collisionInfo)
     {
-        if (collisionInfo.gameObject.gameObject.name == "Goal")
+        if (collisionInfo.gameObject.name == "Goal")
         {
             Debug.Log("GOAL SCORED!!!");
             OnGoal?.Invoke();
         }
+        
+        if (collisionInfo.gameObject.name == "Maze")
+        {
+            OnHitWall?.Invoke();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rigidBody.AddForce(m_force, ForceMode.Force);
     }
 
     private void Update()

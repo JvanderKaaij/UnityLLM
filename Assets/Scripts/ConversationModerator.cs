@@ -33,10 +33,10 @@ namespace DefaultNamespace
         
         private string FEventsPath => $"{resultsPath}/{behaviourName}/{behaviourName}/";
 
-        private void Start()
+        private void Awake()
         {
             LoggingController.Log($"--- NEW EPISODE -- ");
-
+            Debug.Log("Start New Episode");
             // GPTResponse("");//Empty to kick off the flow
             gptConverser.OnResponse.AddListener(GPTResponse);
             //TODO: Disabled for refactor to GPT Image

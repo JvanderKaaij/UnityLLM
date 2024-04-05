@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: 17724ffd71d5de74db62624cd5609fb2
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 1
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.4
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: spider(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Leg2
+      parentName: spider(Clone)
+      position: {x: 0.19042481, y: -0.01764648, z: 0.12695868}
+      rotation: {x: 6.123234e-17, y: 1, z: -6.123234e-17, w: 6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg
+      parentName: R_Leg2
+      position: {x: -0, y: 0.01764648, z: 0.17696899}
+      rotation: {x: -2.4651903e-32, y: -4.9303807e-32, z: -1.2246469e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: R_Leg2
+      position: {x: 2.842171e-17, y: -0.01764648, z: -0.17696899}
+      rotation: {x: -2.4651903e-32, y: -4.9303807e-32, z: -1.2246469e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint
+      parentName: Root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.33885005, y: 0.3190097, z: -0.12333134, w: 0.8764719}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_1
+      parentName: Joint
+      position: {x: -1.1368684e-16, y: 1.7053026e-16, z: -0.44971508}
+      rotation: {x: -0.000000029802319, y: -0.22062582, z: 0.9753586, w: -0.000000014901159}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_2
+      parentName: Joint_1
+      position: {x: -0, y: 2.2737369e-16, z: -0.80132645}
+      rotation: {x: 3.1918912e-16, y: -1.6653345e-16, z: 5.3155666e-32, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Leg
+      parentName: spider(Clone)
+      position: {x: -0.19094875, y: -0.01764648, z: 0.103970185}
+      rotation: {x: 6.123234e-17, y: 1, z: -6.123234e-17, w: 6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg_2
+      parentName: R_Leg
+      position: {x: -5.684342e-17, y: 0.01764648, z: 0.17696899}
+      rotation: {x: -2.4651903e-32, y: -4.9303807e-32, z: -1.2246469e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root_2
+      parentName: R_Leg
+      position: {x: -0, y: -0.01764648, z: -0.17696899}
+      rotation: {x: -2.4651903e-32, y: -4.9303807e-32, z: -1.2246469e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_2_2
+      parentName: Root_2
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.3605967, y: -1.3237339e-32, z: -5.769359e-35, w: 0.93272185}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_1_2
+      parentName: Joint_2_2
+      position: {x: -5.684342e-17, y: 5.684342e-17, z: -0.44971508}
+      rotation: {x: -6.124594e-17, y: 0.8068527, z: 0.5907527, w: -2.0001414e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_2_3
+      parentName: Joint_1_2
+      position: {x: -0, y: 0, z: -0.80132645}
+      rotation: {x: 2.220446e-16, y: -1.2246469e-16, z: 7.649643e-32, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Leg2
+      parentName: spider(Clone)
+      position: {x: 0.19042481, y: -0.01764648, z: -0.09116126}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg_3
+      parentName: L_Leg2
+      position: {x: -0, y: 0.01764648, z: 0.17696899}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root_3
+      parentName: L_Leg2
+      position: {x: -0, y: -0.01764648, z: -0.17696899}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_3
+      parentName: Root_3
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.33885005, y: -0.3190097, z: 0.12333134, w: 0.8764719}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_1_3
+      parentName: Joint_3
+      position: {x: -2.842171e-17, y: 5.684342e-17, z: -0.44971508}
+      rotation: {x: -1.149922e-16, y: 0.8068527, z: 0.5907527, w: 5.340547e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_2_4
+      parentName: Joint_1_3
+      position: {x: -0, y: 4.5474737e-16, z: -0.80132645}
+      rotation: {x: 5.1347815e-16, y: -1.5265567e-16, z: -8.326673e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Leg
+      parentName: spider(Clone)
+      position: {x: -0.19094875, y: -0.01764648, z: -0.11414975}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg_4
+      parentName: L_Leg
+      position: {x: -0, y: 0.01764648, z: 0.17696899}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root_4
+      parentName: L_Leg
+      position: {x: -0, y: -0.01764648, z: -0.17696899}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_4
+      parentName: Root_4
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.3605967, y: 0, z: -0, w: 0.93272185}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_1_4
+      parentName: Joint_4
+      position: {x: -0, y: 5.684342e-17, z: -0.44971508}
+      rotation: {x: 5.26755e-18, y: 0.8068527, z: 0.5907527, w: 9.645695e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joint_2_5
+      parentName: Joint_1_4
+      position: {x: -2.842171e-17, y: 2.2737369e-16, z: -0.80132645}
+      rotation: {x: 2.4980018e-16, y: -2.13751e-17, z: 4.6484404e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spider
+      parentName: spider(Clone)
+      position: {x: -0.2477329, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Spider
+      position: {x: -0.2477329, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body
+      parentName: Spider
+      position: {x: 0.2477329, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.4
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 using UnityEngine;
 
@@ -65,7 +64,7 @@ namespace DefaultNamespace.MLAgents
                 behaveActionSpecs.BranchSizes[i] = 1;
             }
             behaviour.BrainParameters.ActionSpec = behaveActionSpecs;
-            behaviour.InferenceDevice = InferenceDevice.GPU;
+            behaviour.InferenceDevice = InferenceDevice.Burst;
             
             try
             {
